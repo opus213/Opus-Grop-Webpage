@@ -9,12 +9,13 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; 
-            color: #F3F4F6; 
+            background-color: #111827; /* Dark background */
+            color: #F3F4F6; /* Light text */
             overflow-x: hidden;
             position: relative; 
         }
 
+        /* Background Watermark Logo */
         body::before {
             content: "";
             position: fixed; 
@@ -22,7 +23,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/About-Us-Logo.png'); 
+            background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/opus-logo-icon.png'); 
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 60vw; 
@@ -66,6 +67,7 @@
             background-color: rgba(17, 24, 39, 0.85); 
         }
         
+        /* Multi-Item Peek Carousel Styles */
         .carousel-viewport {
             position: relative;
             width: 100%;
@@ -143,21 +145,35 @@
         .carousel-arrow:hover {
             background-color: rgba(0, 0, 0, 0.9);
         }
+
+        /* Mobile adjustments for carousel */
+        @media (max-width: 767px) {
+            .carousel-slide {
+                flex: 0 0 80%; /* Make active slide take more width on mobile */
+                padding: 0 5px; /* Adjust padding if needed */
+            }
+            .carousel-slide img {
+                height: 280px; /* Reduced height for mobile */
+            }
+            .project-hero {
+                 height: 50vh; /* Shorter hero on mobile */
+            }
+        }
         
         .project-description-block {
             margin-top: 2rem; 
         }
         .prose h3 { 
-            font-size: 1.25rem; 
-            font-weight: 600; 
-            color: #93C5FD; 
-            margin-top: 1.5rem; 
-            margin-bottom: 0.75rem; 
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            color: #93C5FD; /* Tailwind blue-300 */
+            margin-top: 1.5rem; /* mt-6 */
+            margin-bottom: 0.75rem; /* mb-3 */
         }
         .prose ul {
             list-style-type: disc;
             padding-left: 1.5rem; 
-            color: #D1D5DB; 
+            color: #D1D5DB; /* gray-300 */
         }
         .prose ul li {
             margin-bottom: 0.25rem; 
@@ -238,7 +254,7 @@
     <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="block">
-                <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Logo-Name.png" alt="The Opus Group Logo" class="header-logo" onerror="this.src='https://placehold.co/200x60/1f2937/FFFFFF?text=Logo'">
+                <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Logo-Name.png" alt="The Opus Group Logo" class="header-logo" onerror="this.onerror=null; this.src='https://placehold.co/200x60/1f2937/FFFFFF?text=Opus+Logo';">
             </a>
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="index.html#work" class="hover:text-blue-400 transition-colors">Work</a>

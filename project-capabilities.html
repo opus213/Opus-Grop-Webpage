@@ -23,7 +23,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616720951066-U8P3CHYT2OD18RULW58Z/About+Us+Logo%402x.png?format=1500w'); /* Graphical logo */
+            background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/opus-logo-icon.png'); 
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 60vw; 
@@ -198,6 +198,16 @@
         .mobile-menu.active {
             display: flex;
         }
+
+        /* Mobile adjustments for hero slideshow height */
+        @media (max-width: 767px) {
+            .page-hero-slideshow {
+                 min-height: 50vh; /* Shorter hero on mobile */
+            }
+            .page-title-hero {
+                height: 50vh; /* Match shorter hero on mobile */
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -205,7 +215,7 @@
     <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="block">
-                <img src="https://static1.squarespace.com/static/5e75ac32c6eb1c6791a31b50/t/61ddc004b058a12026e7dba1/1641922565639/Logo-Name.png" alt="The Opus Group Logo" class="header-logo">
+                <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Logo-Name.png" alt="The Opus Group Logo" class="header-logo" onerror="this.onerror=null; this.src='https://placehold.co/200x60/1f2937/FFFFFF?text=Opus+Logo';">
             </a>
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="index.html#work" class="hover:text-blue-400 transition-colors">Work</a>
@@ -235,19 +245,20 @@
 
     <main>
         <section id="capabilities-hero-slideshow" class="page-hero-slideshow">
-            <div class="page-hero-slide active"> <video autoplay loop muted playsinline poster="https://placehold.co/1920x1080/111827/374151?text=Loading+Sri+Chakra...">
+            <div class="page-hero-slide active"> 
+                <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-welding-action.png"> 
                     <source src="https://dl.dropboxusercontent.com/scl/fi/3iaptyno83ax6ng014p4w/Sri-chakra.mp4?rlkey=ck7lwjn6fxx3870rx84l4ffee&dl=1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="page-hero-slide">
-                <video autoplay loop muted playsinline poster="https://placehold.co/1920x1080/111827/374151?text=Loading+Welding+Video...">
+                <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-welding-action.png"> 
                     <source src="https://dl.dropboxusercontent.com/scl/fi/lgzvzhopun3s58av6c30s/Rob-Welding-e.mp4?rlkey=9obhejyeprctn41r81n6xpygg&dl=1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="page-hero-slide">
-                <video autoplay loop muted playsinline poster="https://placehold.co/1920x1080/111827/374151?text=Loading+Zest+Video...">
+                <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-zest-cube.jpg"> 
                     <source src="https://dl.dropboxusercontent.com/scl/fi/7mc3c0gxkr3h9bv6jjwzk/zest.mp4?rlkey=kpj5805f1u6172jl0hk5cxsdb&dl=1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -289,13 +300,6 @@
                     </div>
                     <div class="capability-item">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                           <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.25 12L17 14.25l-1.25-2.25L13.5 11l2.25-1.25L17 7.5l1.25 2.25L20.5 11l-2.25 1.25z" />
-                        </svg>
-                        <h3>VFX & Animation</h3>
-                        <p>Creating stunning visual effects, motion graphics, and animations to enhance digital and physical experiences.</p>
-                    </div>
-                    <div class="capability-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" />
                         </svg>
                         <h3>Lighting & AV Integration</h3>
@@ -308,14 +312,7 @@
                         <h3>Experiential & Interactive</h3>
                         <p>Developing engaging user experiences, interactive installations, and immersive environments that captivate audiences.</p>
                     </div>
-                     <div class="capability-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
-                        </svg>
-                        <h3>Technology Solutions</h3>
-                        <p>Integrating cutting-edge technology, including custom software, hardware solutions, and show control systems.</p>
-                    </div>
-                     <div class="capability-item">
+                    <div class="capability-item">
                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.073a2.25 2.25 0 01-2.25 2.25h-10.5a2.25 2.25 0 01-2.25-2.25V6.573a2.25 2.25 0 012.25-2.25h9.073M20.25 14.15V6.573a2.25 2.25 0 00-2.25-2.25H15M20.25 14.15v-2.042a2.251 2.251 0 00-2.25-2.25h-3.512a2.251 2.251 0 00-2.25 2.25v2.042M15.875 14.15L12.75 17.25l-3.125-3.125" />
                         </svg>

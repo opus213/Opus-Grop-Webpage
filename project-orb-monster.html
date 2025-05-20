@@ -145,6 +145,20 @@
         .carousel-arrow:hover {
             background-color: rgba(0, 0, 0, 0.9);
         }
+
+        /* Mobile adjustments for carousel */
+        @media (max-width: 767px) {
+            .carousel-slide {
+                flex: 0 0 80%; /* Make active slide take more width on mobile */
+                padding: 0 5px; /* Adjust padding if needed */
+            }
+            .carousel-slide img {
+                height: 280px; /* Reduced height for mobile */
+            }
+            .project-hero {
+                 height: 50vh; /* Shorter hero on mobile */
+            }
+        }
         
         .project-description-block {
             margin-top: 2rem; 
