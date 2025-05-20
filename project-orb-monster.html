@@ -15,8 +15,7 @@
             position: relative; 
         }
 
-        /* Background Watermark Logo (Optional) */
-        /*
+        /* Background Watermark Logo */
         body::before {
             content: "";
             position: fixed; 
@@ -24,15 +23,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('YOUR_WATERMARK_LOGO_URL_HERE'); 
+            background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/opus-logo-icon.png'); 
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 60vw; 
-            opacity: 0.03; 
+            opacity: 0.07; 
             z-index: 0; 
             pointer-events: none; 
         }
-        */
 
         .header-logo {
             max-height: 60px; 
@@ -47,7 +45,7 @@
             justify-content: center;
             text-align: center;
             position: relative; 
-            z-index: 1; 
+            z-index: 1;
         }
         .project-hero-overlay {
             position: absolute;
@@ -242,7 +240,7 @@
     <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="block">
-                <img src="https://static1.squarespace.com/static/5e75ac32c6eb1c6791a31b50/t/61ddc004b058a12026e7dba1/1641922565639/Logo-Name.png" alt="The Opus Group Logo" class="header-logo">
+                <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Logo-Name.png" alt="The Opus Group Logo" class="header-logo" onerror="this.onerror=null; this.src='https://placehold.co/200x60/1f2937/FFFFFF?text=Opus+Logo';">
             </a>
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="index.html#work" class="hover:text-blue-400 transition-colors">Work</a>
@@ -271,14 +269,14 @@
     </div>
 
     <main>
-        <section class="project-hero" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616739177986-1RRNHD0R53UEEXUG9B4F/20191014_072016+copy.jpg');">
+        <section class="project-hero" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/orb-monster-hero.jpg');">
             <div class="project-hero-overlay"></div>
             <div class="project-title-hero">
                 <h1 class="text-4xl md:text-6xl font-bold text-white">Tim Burton: Orb Monster</h1>
             </div>
         </section>
 
-        <section class="content-section"> 
+        <section class="content-section bg-gray-800"> 
             <div class="container mx-auto max-w-6xl px-4">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                     
@@ -287,25 +285,25 @@
                         <div id="orb-monster-carousel" class="carousel-viewport">
                             <div class="carousel-track">
                                 <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/74b6a546-ad47-4eac-af26-ee3f4526fd93/1%29+sketch.JPG" alt="Orb Monster Sketch" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Sketch+Not+Found'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/orb-monster-sketch.jpg" alt="Orb Monster Sketch" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Sketch'">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/80391ee1-aaac-45dc-94fa-f533a1360715/3%29+3d+print.JPG" alt="3D Printed Model" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=3D+Model+Not+Found'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/orb-monster-3d-print.jpg" alt="3D Printed Model" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=3D+Model'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/orb-monster-color-render.jpg" alt="Color Rendering" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Rendering'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/orb-monster-legs-frame.jpg" alt="Steel Frame Structure" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Frame'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/orb-monster-ribs-cnc.jpg" alt="CNC Plasma Cut Ribs and Teeth" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=CNC+Parts'">
                                 </div>
                                  <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/e8ff7049-e502-4c06-82d5-ba73b5e04414/4%29+color+rendering.JPG" alt="Color Rendering" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Rendering+Not+Found'">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/ba8b757c-1da5-42f6-a438-ac41c1f8b326/8%29+3+legs.JPG" alt="Steel Frame Structure" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Frame+Not+Found'">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/43930d66-512e-4a97-a858-8eefdd9051b1/10%29+ribs.JPG" alt="CNC Plasma Cut Ribs and Teeth" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=CNC+Parts+Not+Found'">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/3117e6d2-6ea0-4a77-ae58-cc09140a8be4/17%29+crane+assembly.JPG" alt="Crane Assembly on Site" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Assembly+Not+Found'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/orb-monster-crane-assembly.jpg" alt="Crane Assembly on Site" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Assembly'">
                                 </div>
                                  <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/07fe21cd-418b-42e7-852e-2b97adee1508/20%29+daytime+shot.jpg" alt="Final Orb Monster Installation" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Final+Shot+Not+Found'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/gallery-orb-monster-day.jpg" alt="Final Orb Monster Installation" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Final+Shot'">
                                 </div>
                             </div>
                             <div class="carousel-nav">
@@ -315,18 +313,16 @@
                         </div>
                         
                         <div class="project-description-block">
-                            <h2 class="text-3xl font-semibold text-blue-400 mb-6">Fabricating a Monster: The Orb for Tim Burton</h2>
+                            <h2 class="text-3xl font-semibold text-blue-400 mb-6">Bringing Tim Burton's Vision to The Neon Museum</h2>
                             <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
                                 <p class="leading-relaxed">
-                                    The client, Tim Burton and The Neon Museum, presented us with a 1/16th scale model of the "Orb Monster" sculpture for display in Las Vegas. Given creative freedom with materials, we embarked on a journey to bring this unique vision to life.
+                                    The client came to us with a 1/16th scale model of the desired sculpture to be displayed at The Neon Museum in Las Vegas. The client gave us free reign on the materials, so we got creative with it.
                                 </p>
                                 <h3>Our Approach:</h3>
                                 <ul class="leading-relaxed">
-                                    <li><strong>Scaling & Design:</strong> We meticulously scaled the client's model, creating detailed construction drawings and color renderings for precise color palette selection and client approval.</li>
-                                    <li><strong>Material Innovation:</strong> The sculpture was crafted from a robust steel structure, with foam details meticulously shaped and attached. The final pieces utilized a strong, waterproof two-part epoxy for a high-finish, durable surface.</li>
-                                    <li><strong>Precision Fabrication:</strong> CNC plasma cutting was employed for accurate "rib legs" and teeth profiles, staying true to the original miniature.</li>
-                                    <li><strong>Integrated Technology:</strong> iPad-controlled lighting was seamlessly integrated, designed for a 12-hour loop to meet the museum's specific operational requirements.</li>
-                                    <li><strong>Complex Installation:</strong> The sculpture's components, including its tall legs, were assembled on-site using an extension boom lift for welding and finishing, with epoxy putty ensuring seamless joints.</li>
+                                    <li><strong>Scaling & Design:</strong> To scale the client’s miniature model, we created construction drawings to scale up proportionately. Color renderings were provided for client approval.</li>
+                                    <li><strong>Fabrication:</strong> The sculpture needed to be durable and strong to be craned in, so we built a steel structure that the foam details could be attached around. The “rib legs” and teeth profiles were cut using our CNC plasma cutter to be accurate and proportionately correct to the miniature.</li>
+                                    <li><strong>Lighting & Installation:</strong> The iPad controlled integrated lighting was designed to be on a 12-hour loop and were very specific to the museum’s specifications. Once lifted onto the site, the mouth was bolted and an epoxy putty was used to make the joints seamless.</li>
                                 </ul>
                             </div>
                         </div>
@@ -339,20 +335,20 @@
                                 <li><strong>Client:</strong> Tim Burton and The Neon Museum</li>
                                 <li><strong>Location:</strong> The Neon Museum, Las Vegas</li>
                                 <li><strong>Services:</strong></li>
-                                <li class="ml-4">- Design & Conceptualization</li>
-                                <li class="ml-4">- 3D Modeling & Color Renderings</li>
-                                <li class="ml-4">- Steel Fabrication & CNC Machining</li>
-                                <li class="ml-4">- Foam Sculpting & Epoxy Finishing</li>
-                                <li class="ml-4">- Lighting Design & Integration</li>
-                                <li class="ml-4">- On-Site Installation & Logistics</li>
+                                <li class="ml-4">- Design, Machining</li>
+                                <li class="ml-4">- Fabrication, Installation</li>
+                                <li class="ml-4">- Clay Modeling & 3D Renderings</li>
+                                <li class="ml-4">- Steelwork & Epoxy Finishing</li>
+                                <li class="ml-4">- CNC Plasma Cutting</li>
+                                <li class="ml-4">- Integrated Lighting (iPad Controlled)</li>
                             </ul>
                             <h3 class="mt-8">Key Features</h3>
                              <ul class="text-gray-300">
                                 <li>Collaboration with Tim Burton</li>
-                                <li>Scaled from Miniature Model</li>
-                                <li>Durable Steel & Epoxy Construction</li>
-                                <li>iPad-Controlled Lighting System</li>
-                                <li>Seamless On-Site Assembly</li>
+                                <li>Site-Specific Museum Installation</li>
+                                <li>Scaled from 1/16th Model</li>
+                                <li>Durable, Weatherproof Construction</li>
+                                <li>Custom Programmed Lighting</li>
                             </ul>
                         </div>
                     </aside>
