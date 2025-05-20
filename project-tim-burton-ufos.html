@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Tim Burton - UFOs - The Opus Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark background */
+            color: #F3F4F6; /* Light text */
+            overflow-x: hidden;
+            position: relative; 
+        }
+
+        /* Background Watermark Logo */
+        body::before {
+            content: "";
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616720951066-U8P3CHYT2OD18RULW58Z/About+Us+Logo%402x.png?format=1500w'); /* Graphical logo */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 60vw; 
+            opacity: 0.07; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+
+        .header-logo {
+            max-height: 60px; 
+            width: auto;
+        }
+        .project-hero {
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative; 
+            z-index: 1;
+        }
+        .project-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+        }
+        .project-title-hero {
+            position: relative;
+            z-index: 2; 
+        }
+        .content-section {
+            padding-top: 3rem; 
+            padding-bottom: 3rem; 
+            position: relative; 
+            z-index: 1; 
+            background-color: rgba(17, 24, 39, 0.85); 
+        }
+        
+        /* Multi-Item Peek Carousel Styles */
+        .carousel-viewport {
+            position: relative;
+            width: 100%;
+            max-width: 900px; 
+            margin: 2rem auto 2.5rem auto;
+            overflow: hidden; 
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.20);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out; 
+        }
+
+        .carousel-slide {
+            flex: 0 0 33.333%; 
+            padding: 0 10px; 
+            box-sizing: border-box;
+            opacity: 0.5; 
+            transform: scale(0.8); 
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            position: relative; 
+            z-index: 1;
+        }
+
+        .carousel-slide.active-slide {
+            opacity: 1;
+            transform: scale(1); 
+            z-index: 3; 
+        }
+
+        .carousel-slide.adjacent-slide { 
+            opacity: 0.7;
+            transform: scale(0.9); 
+            z-index: 2;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 350px; 
+            object-fit: cover; 
+            display: block;
+            border-radius: 0.5rem; 
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0.5rem; 
+            box-sizing: border-box; 
+            z-index: 10; 
+        }
+
+        .carousel-arrow {
+            background-color: rgba(20, 20, 20, 0.7);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 50%; 
+            cursor: pointer;
+            font-size: 1.5rem; 
+            transition: background-color 0.2s ease;
+            line-height: 1;
+            width: 40px; 
+            height: 40px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        .project-description-block {
+            margin-top: 2rem; 
+        }
+        .prose h3 { 
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            color: #93C5FD; /* Tailwind blue-300 */
+            margin-top: 1.5rem; /* mt-6 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5rem; 
+            color: #D1D5DB; /* gray-300 */
+        }
+        .prose ul li {
+            margin-bottom: 0.25rem; 
+        }
+        .prose p {
+            line-height: 1.75; 
+            margin-bottom: 1rem; 
+        }
+
+        .sidebar-info {
+            background-color: rgba(31, 41, 55, 0.85); /* Slightly transparent background */
+            padding: 1.5rem; 
+            border-radius: 0.75rem;
+        }
+        .sidebar-info h3 {
+            font-size: 1.25rem; 
+            font-weight: 600;
+            color: #60A5FA; 
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid #374151; 
+            padding-bottom: 0.5rem;
+        }
+        .sidebar-info ul li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem; 
+        }
+        .sidebar-info strong {
+            color: #D1D5DB; 
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            display: inline-block; 
+        }
+        .btn-primary {
+            background-color: #3B82F6; 
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+         .btn-secondary {
+            background-color: transparent;
+            color: #F3F4F6;
+            border: 1px solid #4B5563; 
+        }
+        .btn-secondary:hover {
+            background-color: #374151; 
+        }
+        .mobile-menu {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(17, 24, 39, 0.95); 
+            z-index: 50;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mobile-menu a {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #F3F4F6;
+        }
+        .mobile-menu.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="block">
+                <img src="https://static1.squarespace.com/static/5e75ac32c6eb1c6791a31b50/t/61ddc004b058a12026e7dba1/1641922565639/Logo-Name.png" alt="The Opus Group Logo" class="header-logo">
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="index.html#work" class="hover:text-blue-400 transition-colors">Work</a>
+                <a href="index.html#expertise" class="hover:text-blue-400 transition-colors">Expertise</a>
+                <a href="index.html#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="close-mobile-menu-button" class="absolute top-6 right-6 text-white focus:outline-none">
+             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="index.html#work" class="mobile-nav-link">Work</a>
+        <a href="index.html#expertise" class="mobile-nav-link">Expertise</a>
+        <a href="index.html#about" class="mobile-nav-link">About</a>
+        <a href="index.html#contact" class="mt-4 btn btn-primary mobile-nav-link">Contact Us</a>
+    </div>
+
+    <main>
+        <section class="project-hero" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616739347416-LKD2ZB9MWGBN222TY5OT/20191015_202730.jpg?format=1500w');">
+            <div class="project-hero-overlay"></div>
+            <div class="project-title-hero">
+                <h1 class="text-4xl md:text-6xl font-bold text-white">Tim Burton: UFOs</h1>
+            </div>
+        </section>
+
+        <section class="content-section"> 
+            <div class="container mx-auto max-w-6xl px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                    
+                    <div class="lg:col-span-8">
+                        <h2 class="text-3xl font-semibold text-blue-400 mt-0 mb-8 text-center lg:text-left">Visual Journey</h2>
+                        <div id="tim-burton-ufo-carousel" class="carousel-viewport">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/15a8da82-2972-4eff-9063-03c8f85e647b/2%29+UFO+sketches.jpg?format=1500w" alt="UFO Sketches" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Sketches'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/ad5b221e-9661-42cf-92ec-88851fbc0b11/5%29+clay+closeup.jpg?format=1500w" alt="Clay Model Closeup" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Clay+Model'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/e6c3042f-613c-417a-be39-8e1d234cf6fe/4%29+maquette.jpg?format=1500w" alt="Maquette" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Maquette'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/c87c1c62-a2bc-4101-bb2f-891a7b80610c/10%29+eyes+lit+up+.jpg?format=1500w" alt="Eyes Lit Up" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Eyes+Lit+Up'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/2641d49f-c994-4a6d-a6f9-98e896858196/11%29+Installed+in+Vegas.jpg?format=1500w" alt="Installed in Vegas - Daytime" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Daytime+Install'">
+                                </div>
+                                 <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616739347416-LKD2ZB9MWGBN222TY5OT/20191015_202730.jpg?format=1500w" alt="Final UFO Installation - Night" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Night+Install'">
+                                </div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="carousel-arrow prev-slide" aria-label="Previous image">&#10094;</button>
+                                <button class="carousel-arrow next-slide" aria-label="Next image">&#10095;</button>
+                            </div>
+                        </div>
+                        
+                        <div class="project-description-block">
+                            <h2 class="text-3xl font-semibold text-blue-400 mb-6">Bringing Tim Burton's Vision to The Neon Museum</h2>
+                            <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                                <p class="leading-relaxed">
+                                For Tim Burton's exhibition at The Neon Museum in Las Vegas, we were tasked with creating a series of iconic UFO sculptures. The project required careful navigation of museum specifications and a multi-stage fabrication process to bring Burton's unique characters to life.
+                                </p>
+                                <h3>Our Approach:</h3>
+                                <ul class="leading-relaxed">
+                                    <li><strong>Contextual Design:</strong> Developed pre-visualizations showing the sculptures within the museum's existing environment.</li>
+                                    <li><strong>Iterative Sculpting:</strong> Utilized clay for initial models, allowing for easy revisions to perfect character forms.</li>
+                                    <li><strong>Precision Engineering:</strong> Created CAD drawings to ensure sculptures met strict height tolerances (within 1/4”).</li>
+                                    <li><strong>Durable Fabrication:</strong> Constructed final pieces from a robust, waterproof two-part epoxy for a high-quality, lasting finish.</li>
+                                    <li><strong>Dynamic Lighting:</strong> Programmed and synced integrated LED lighting to create the illusion of movement, enhancing the otherworldly effect.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="lg:col-span-4">
+                        <div class="sidebar-info sticky top-28">
+                            <h3>Project Details</h3>
+                            <ul class="text-gray-300">
+                                <li><strong>Client:</strong> Tim Burton & The Neon Museum</li>
+                                <li><strong>Location:</strong> The Neon Museum, Las Vegas</li>
+                                <li><strong>Services:</strong></li>
+                                <li class="ml-4">- Conceptual Design & Pre-visualization</li>
+                                <li class="ml-4">- Clay Modeling & Character Development</li>
+                                <li class="ml-4">- CAD Design & Engineering</li>
+                                <li class="ml-4">- Steel & Epoxy Fabrication</li>
+                                <li class="ml-4">- Custom Lighting Design & Programming</li>
+                                <li class="ml-4">- On-Site Installation & Finishing</li>
+                            </ul>
+                            <h3 class="mt-8">Key Features</h3>
+                             <ul class="text-gray-300">
+                                <li>Collaboration with Tim Burton</li>
+                                <li>Site-Specific Museum Installation</li>
+                                <li>Iterative Character Sculpting</li>
+                                <li>Precision Fabrication</li>
+                                <li>Durable Epoxy Finishing</li>
+                                <li>Synchronized Animated Lighting</li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+                 <div class="text-center mt-16">
+                    <a href="index.html#work" class="btn btn-secondary text-lg">Back to Our Work</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 py-12 text-center"> 
+        <div class="container mx-auto">
+            <p class="text-gray-500">&copy; <span id="currentYear"></span> The Opus Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if(mobileMenuButton && mobileMenu && closeMobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            });
+
+            closeMobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+        
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Project Carousel Functionality (reusable for multiple carousels)
+        function setupCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            if (carousel) {
+                const track = carousel.querySelector('.carousel-track');
+                const slides = Array.from(track.children);
+                const nextButton = carousel.querySelector('.next-slide');
+                const prevButton = carousel.querySelector('.prev-slide');
+                
+                let currentIndex = 0;
+
+                function updateSlideStyling() {
+                    slides.forEach((slide, i) => {
+                        slide.classList.remove('active-slide', 'adjacent-slide');
+                        if (i === currentIndex) {
+                            slide.classList.add('active-slide');
+                        } else if (slides.length > 1 && (i === (currentIndex + 1) % slides.length || i === (currentIndex - 1 + slides.length) % slides.length)) {
+                            slide.classList.add('adjacent-slide');
+                        }
+                    });
+                }
+
+                function moveToSlide(index) {
+                    if (slides.length === 0) return;
+                    
+                    const viewport = carousel; 
+                    const viewportWidth = viewport.offsetWidth;
+                    
+                    const slideElementWidth = slides[0].offsetWidth; 
+                    const slideStyle = window.getComputedStyle(slides[0]);
+                    const marginLeft = parseFloat(slideStyle.marginLeft);
+                    const marginRight = parseFloat(slideStyle.marginRight);
+                    const slideEffectiveWidth = slideElementWidth + marginLeft + marginRight;
+
+                    const targetSlideCenterInTrack = (index * slideEffectiveWidth) + (slideElementWidth / 2) + marginLeft;
+                    const viewportCenter = viewportWidth / 2;
+                    
+                    const transformX = viewportCenter - targetSlideCenterInTrack;
+                    
+                    track.style.transform = `translateX(${transformX}px)`;
+                    currentIndex = index;
+                    updateSlideStyling();
+                }
+
+                if (slides.length > 0) {
+                    const initCarousel = () => moveToSlide(currentIndex);
+                    window.addEventListener('load', () => setTimeout(initCarousel, 100));
+                    window.addEventListener('resize', initCarousel);
+
+                    nextButton.addEventListener('click', () => {
+                        const nextIndex = (currentIndex + 1) % slides.length;
+                        moveToSlide(nextIndex);
+                    });
+
+                    prevButton.addEventListener('click', () => {
+                        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                        moveToSlide(prevIndex);
+                    });
+                }
+            }
+        }
+        
+        // Initialize carousels by their ID
+        setupCarousel('tim-burton-ufo-carousel'); 
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Capabilities - The Opus Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark background */
+            color: #F3F4F6; /* Light text */
+            overflow-x: hidden;
+            position: relative; 
+        }
+
+        /* Background Watermark Logo */
+        body::before {
+            content: "";
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616720951066-U8P3CHYT2OD18RULW58Z/About+Us+Logo%402x.png?format=1500w'); /* Graphical logo */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 60vw; 
+            opacity: 0.05; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+
+        .header-logo {
+            max-height: 60px; 
+            width: auto;
+        }
+
+        /* Page Hero Section Styles (now for slideshow) */
+        .page-hero-slideshow {
+            min-height: 60vh; 
+            position: relative; 
+            overflow: hidden;
+            z-index: 1; 
+            background-color: #111827; /* Fallback background for video slide loading */
+        }
+
+        .page-hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover; 
+            background-position: center center; 
+            background-repeat: no-repeat; 
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            z-index: 1;
+        }
+        
+        .page-hero-slide video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover; /* Ensure video covers the area */
+            z-index: 1; /* Video itself */
+        }
+
+
+        .page-hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        
+        .page-hero-overlay { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(17, 24, 39, 0.85); 
+            z-index: 3; 
+        }
+        .page-title-hero { 
+            position: relative;
+            z-index: 4; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 60vh; 
+            padding: 1.5rem;
+        }
+
+        .content-section {
+            padding-top: 4rem; 
+            padding-bottom: 4rem; 
+            position: relative; 
+            z-index: 1; 
+            background-color: rgba(17, 24, 39, 0.9); 
+        }
+        
+        .capability-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2rem; 
+        }
+        @media (min-width: 768px) { 
+            .capability-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) { 
+             .capability-grid {
+                grid-template-columns: repeat(3, 1fr); 
+            }
+        }
+
+        .capability-item {
+            background-color: rgba(31, 41, 55, 0.85); 
+            padding: 2rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; 
+            z-index: 1;
+        }
+        .capability-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .capability-item svg {
+            width: 3rem; 
+            height: 3rem; 
+            margin: 0 auto 1rem auto;
+            color: #3B82F6; 
+        }
+        .capability-item h3 {
+            font-size: 1.5rem; 
+            font-weight: 600; 
+            margin-bottom: 0.5rem;
+            color: #F3F4F6; 
+        }
+        .capability-item p {
+            font-size: 0.95rem;
+            color: #9CA3AF; 
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            display: inline-block; 
+        }
+        .btn-primary {
+            background-color: #3B82F6; 
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+         .btn-secondary {
+            background-color: transparent;
+            color: #F3F4F6;
+            border: 1px solid #4B5563; 
+        }
+        .btn-secondary:hover {
+            background-color: #374151; 
+        }
+        .mobile-menu {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(17, 24, 39, 0.95); 
+            z-index: 50;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mobile-menu a {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #F3F4F6;
+        }
+        .mobile-menu.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="block">
+                <img src="https://static1.squarespace.com/static/5e75ac32c6eb1c6791a31b50/t/61ddc004b058a12026e7dba1/1641922565639/Logo-Name.png" alt="The Opus Group Logo" class="header-logo">
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="index.html#work" class="hover:text-blue-400 transition-colors">Work</a>
+                <a href="index.html#expertise" class="hover:text-blue-400 transition-colors">Expertise</a>
+                <a href="index.html#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="close-mobile-menu-button" class="absolute top-6 right-6 text-white focus:outline-none">
+             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="index.html#work" class="mobile-nav-link">Work</a>
+        <a href="index.html#expertise" class="mobile-nav-link">Expertise</a>
+        <a href="index.html#about" class="mobile-nav-link">About</a>
+        <a href="index.html#contact" class="mt-4 btn btn-primary mobile-nav-link">Contact Us</a>
+    </div>
+
+    <main>
+        <section id="capabilities-hero-slideshow" class="page-hero-slideshow">
+            <div class="page-hero-slide active"> <video autoplay loop muted playsinline poster="https://placehold.co/1920x1080/111827/374151?text=Loading+Sri+Chakra...">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/3iaptyno83ax6ng014p4w/Sri-chakra.mp4?rlkey=ck7lwjn6fxx3870rx84l4ffee&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="page-hero-slide">
+                <video autoplay loop muted playsinline poster="https://placehold.co/1920x1080/111827/374151?text=Loading+Welding+Video...">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/lgzvzhopun3s58av6c30s/Rob-Welding-e.mp4?rlkey=9obhejyeprctn41r81n6xpygg&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="page-hero-slide">
+                <video autoplay loop muted playsinline poster="https://placehold.co/1920x1080/111827/374151?text=Loading+Zest+Video...">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/7mc3c0gxkr3h9bv6jjwzk/zest.mp4?rlkey=kpj5805f1u6172jl0hk5cxsdb&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <div class="page-hero-overlay"></div>
+            <div class="page-title-hero">
+                <h1 class="text-5xl md:text-7xl font-bold text-white">Our Capabilities</h1>
+                <p class="text-xl md:text-2xl text-blue-300 mt-4 max-w-2xl mx-auto">From concept to creation, we bring ambitious visions to life.</p>
+            </div>
+        </section>
+
+        <section class="content-section"> 
+            <div class="container mx-auto max-w-5xl px-4">
+                <p class="text-center text-lg text-gray-300 mb-16 leading-relaxed">
+                    At The Opus Group, we offer a comprehensive suite of services to manage your project from initial ideation through to final installation and beyond. Our expertise spans the full creative and technical spectrum, ensuring a seamless execution of even the most complex endeavors.
+                </p>
+                <div class="capability-grid">
+                    <div class="capability-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.354a15.055 15.055 0 01-4.5 0m4.5 0v-.375c0-.621-.504-1.125-1.125-1.125h-1.5c-.621 0-1.125.504-1.125 1.125v.375m-3.75 0h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H3.75A2.25 2.25 0 001.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+                        </svg>
+                        <h3>Creative Development</h3>
+                        <p>Transforming initial ideas into tangible concepts with storyboarding, mood boards, and detailed pre-visualizations.</p>
+                    </div>
+                    <div class="capability-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                        </svg>
+                        <h3>Design & Engineering</h3>
+                        <p>Detailed 2D/3D CAD modeling, structural engineering, and material specification for robust and feasible designs.</p>
+                    </div>
+                    <div class="capability-item">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.472-2.472a3.75 3.75 0 00-5.303-5.303L6.25 9.75M11.42 15.17L6.25 9.75m5.17 5.42l-2.472-2.472a3.75 3.75 0 00-5.303-5.303L6.25 9.75" />
+                        </svg>
+                        <h3>Fabrication & Machining</h3>
+                        <p>Expert craftsmanship in carpentry, metalwork, CNC machining, and custom finishes to bring designs to life.</p>
+                    </div>
+                    <div class="capability-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.25 12L17 14.25l-1.25-2.25L13.5 11l2.25-1.25L17 7.5l1.25 2.25L20.5 11l-2.25 1.25z" />
+                        </svg>
+                        <h3>VFX & Animation</h3>
+                        <p>Creating stunning visual effects, motion graphics, and animations to enhance digital and physical experiences.</p>
+                    </div>
+                    <div class="capability-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" />
+                        </svg>
+                        <h3>Lighting & AV Integration</h3>
+                        <p>Expert design and integration of dynamic lighting systems, DMX controls, and audio-visual elements for immersive impact.</p>
+                    </div>
+                     <div class="capability-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                        </svg>
+                        <h3>Experiential & Interactive</h3>
+                        <p>Developing engaging user experiences, interactive installations, and immersive environments that captivate audiences.</p>
+                    </div>
+                     <div class="capability-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                        <h3>Technology Solutions</h3>
+                        <p>Integrating cutting-edge technology, including custom software, hardware solutions, and show control systems.</p>
+                    </div>
+                     <div class="capability-item">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.073a2.25 2.25 0 01-2.25 2.25h-10.5a2.25 2.25 0 01-2.25-2.25V6.573a2.25 2.25 0 012.25-2.25h9.073M20.25 14.15V6.573a2.25 2.25 0 00-2.25-2.25H15M20.25 14.15v-2.042a2.251 2.251 0 00-2.25-2.25h-3.512a2.251 2.251 0 00-2.25 2.25v2.042M15.875 14.15L12.75 17.25l-3.125-3.125" />
+                        </svg>
+                        <h3>Installation & Logistics</h3>
+                        <p>Full-service project management, global logistics, on-site installation, and post-event support.</p>
+                    </div>
+                    <div class="capability-item">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.4-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.4-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.4 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.4.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                        <h3>Custom Signage & Branding</h3>
+                        <p>Design and fabrication of unique, high-impact signage, wayfinding systems, and branded environmental graphics.</p>
+                    </div>
+                </div>
+                 <div class="text-center mt-16">
+                    <a href="index.html#contact" class="btn btn-primary text-lg">Discuss Your Project</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 py-12 text-center"> 
+        <div class="container mx-auto">
+            <p class="text-gray-500">&copy; <span id="currentYear"></span> The Opus Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if(mobileMenuButton && mobileMenu && closeMobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            });
+
+            closeMobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+        
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Capabilities Page Hero Slideshow Functionality
+        const capabilitiesSlideshow = document.getElementById('capabilities-hero-slideshow');
+        if (capabilitiesSlideshow) { 
+            const slides = capabilitiesSlideshow.querySelectorAll('.page-hero-slide');
+            let currentSlide = 0;
+            const slideInterval = 7000; 
+
+            function nextCapabilityHeroSlide() {
+                if (slides.length > 0) { 
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+            }
+
+            if (slides.length > 1) { 
+                 setInterval(nextCapabilityHeroSlide, slideInterval);
+            } else if (slides.length === 1) { 
+                slides[0].classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>

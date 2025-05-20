@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Opus Group - Redesigned</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark background */
+            color: #F3F4F6; /* Light text */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Header Logo Style */
+        .header-logo {
+            max-height: 60px; 
+            width: auto;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            height: 100vh; 
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out; 
+            z-index: 1; 
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2; 
+        }
+
+        .hero-content {
+            position: relative; 
+            z-index: 3; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%; 
+            padding: 1.5rem; 
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); 
+            z-index: 2; 
+        }
+
+        .section {
+            padding: 80px 20px; 
+            min-height: 70vh; 
+        }
+        .gallery-item {
+            height: 400px; 
+            background-size: cover;
+            background-position: center;
+        }
+        .card {
+            background-color: #1F2937; 
+            border-radius: 0.75rem; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #3B82F6; 
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #F3F4F6;
+            border: 1px solid #4B5563; 
+        }
+        .btn-secondary:hover {
+            background-color: #374151; 
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mobile-menu {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(17, 24, 39, 0.95); 
+            z-index: 50;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mobile-menu a {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #F3F4F6;
+        }
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* About Section Logo Style */
+        .about-section-content {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            gap: 2rem; 
+        }
+        @media (min-width: 768px) { 
+            .about-section-content {
+                flex-direction: row; 
+                text-align: left;
+            }
+        }
+        .about-section-logo {
+            max-width: 250px; 
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem; 
+        }
+        @media (min-width: 768px) {
+             .about-section-logo {
+                margin-bottom: 0;
+                margin-right: 2rem; 
+             }
+        }
+        .about-text-block {
+            max-width: 600px; 
+        }
+
+        /* Contact Form Styles */
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            background-color: #1F2937; 
+            border: 1px solid #374151; 
+            color: #F3F4F6; 
+            border-radius: 0.5rem; 
+            padding: 10px 12px;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: #3B82F6; 
+            outline: none; 
+        }
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical; 
+        }
+        .form-message {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+        }
+        .form-message.success {
+            background-color: #10B981; 
+            color: #065F46;
+        }
+        .form-message.error {
+            background-color: #EF4444; 
+            color: #991B1B;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="block"> <img src="https://static1.squarespace.com/static/5e75ac32c6eb1c6791a31b50/t/61ddc004b058a12026e7dba1/1641922565639/Logo-Name.png" alt="The Opus Group Logo" class="header-logo">
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#work" class="hover:text-blue-400 transition-colors">Work</a>
+                <a href="#expertise" class="hover:text-blue-400 transition-colors">Expertise</a>
+                <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="#contact" class="btn btn-primary">Contact Us</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="close-mobile-menu-button" class="absolute top-6 right-6 text-white focus:outline-none">
+             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="#work" class="mobile-nav-link">Work</a>
+        <a href="#expertise" class="mobile-nav-link">Expertise</a>
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#contact" class="mt-4 btn btn-primary mobile-nav-link">Contact Us</a>
+    </div>
+
+    <section class="hero-section">
+        <div id="hero-slides-container">
+            <div class="hero-slide active" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616738985827-J4NSF7MU1B6L3EJR419L/2018%2BDaytime%2BStage%2BiHeartRadio%2BMusic%2BFestival%2BJbTy_2ITOt-x.jpg?format=1500w');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/55474723-6706-4057-87a9-3f42d4cb424a/Sculptures.png?format=1500w');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616739015669-XT3YFKP0PWCMGPPQW9BH/zest%2Bcube%2B2.jpg?format=1500w');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/a7484391-f732-40c4-b4d5-74697a03e491/Welding.png?format=1500w');"></div> 
+            <div class="hero-slide" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616739347416-LKD2ZB9MWGBN222TY5OT/20191015_202730.jpg?format=1500w');"></div>
+        </div>
+        <div class="hero-overlay"></div> 
+        <div class="hero-content">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                Crafting Unforgettable <span class="text-blue-400">Experiences</span>.
+            </h1>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+                We specialize in innovative exhibitions, captivating art installations, immersive experiential marketing, and visionary film production.
+            </p>
+            <a href="#work" class="btn btn-primary text-lg">Explore Our Work</a>
+        </div>
+    </section>
+
+    <section id="work" class="section bg-gray-900">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Work</h2>
+            <p class="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
+                Discover the impact of our creative solutions across diverse projects.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <a href="project-lil-uzi-vert.html" class="block group card overflow-hidden"> 
+                    <div class="gallery-item" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616738985827-J4NSF7MU1B6L3EJR419L/2018%2BDaytime%2BStage%2BiHeartRadio%2BMusic%2BFestival%2BJbTy_2ITOt-x.jpg?format=1500w');" 
+                         onerror="this.style.backgroundImage='url(https://placehold.co/600x400/2d3748/edf2f7?text=Lil+Uzi+Vert)'">
+                        <div class="p-6 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end h-full">
+                            <h3 class="text-xl font-semibold text-white mb-1">Lil Uzi Vert: Large Skull</h3>
+                            <p class="text-sm text-blue-300">Experiential Marketing</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="project-orb-monster.html" class="block group card overflow-hidden">
+                     <div class="gallery-item" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/07fe21cd-418b-42e7-852e-2b97adee1508/20%29+daytime+shot.jpg?format=1500w');"
+                          onerror="this.style.backgroundImage='url(https://placehold.co/600x400/2c5282/e2e8f0?text=Orb+Monster)'">
+                        <div class="p-6 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end h-full">
+                            <h3 class="text-xl font-semibold text-white mb-1">Tim Burton: Orb Monster</h3>
+                            <p class="text-sm text-blue-300">Art Installation</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="project-desert-hearts.html" class="block group card overflow-hidden">
+                    <div class="gallery-item" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/c8b1b5e4-c80b-47b2-ad28-d805d1a48d67/30%29+night+show.jpg?format=1500w');"
+                         onerror="this.style.backgroundImage='url(https://placehold.co/600x400/38a169/f0fff4?text=Desert+Hearts)'">
+                         <div class="p-6 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end h-full">
+                            <h3 class="text-xl font-semibold text-white mb-1">Desert Hearts Stage</h3>
+                            <p class="text-sm text-blue-300">Stage Design & Fabrication</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="project-infinity-cube.html" class="block group card overflow-hidden">
+                    <div class="gallery-item" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/d0a34599-9a1c-4d76-a9ca-591aedb5a244/30%29+installation+cube+.jpg?format=1500w');"
+                         onerror="this.style.backgroundImage='url(https://placehold.co/600x400/1a2b3c/d3e4f5?text=Infinity+Cube)'">
+                         <div class="p-6 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end h-full">
+                            <h3 class="text-xl font-semibold text-white mb-1">Zest Finance: Infinity Cube</h3>
+                            <p class="text-sm text-blue-300">Trade Show Booth</p>
+                        </div>
+                    </div>
+                </a>
+                 <a href="project-tim-burton-ufos.html" class="block group card overflow-hidden">
+                    <div class="gallery-item" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616739347416-LKD2ZB9MWGBN222TY5OT/20191015_202730.jpg?format=1500w');"
+                         onerror="this.style.backgroundImage='url(https://placehold.co/600x400/4a5568/1a202c?text=Tim+Burton+UFOs)'">
+                        <div class="p-6 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end h-full">
+                            <h3 class="text-xl font-semibold text-white mb-1">Tim Burton: UFOs</h3>
+                            <p class="text-sm text-blue-300">Art Installation</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="project-capabilities.html" class="block group card overflow-hidden"> 
+                     <div class="gallery-item" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/a7484391-f732-40c4-b4d5-74697a03e491/Welding.png?format=1500w');"
+                          onerror="this.style.backgroundImage='url(https://placehold.co/600x400/5a6578/2a303c?text=Our+Capabilities)'">
+                        <div class="p-6 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end h-full">
+                            <h3 class="text-xl font-semibold text-white mb-1">Capabilities</h3>
+                            <p class="text-sm text-blue-300">Our Core Skills & Services</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <a href="#" class="btn btn-secondary mt-12">View All Projects</a>
+        </div>
+    </section>
+
+    <section id="expertise" class="section bg-gray-900">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Expertise</h2>
+            <p class="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
+                We bring ideas to life through a range of specialized services.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card p-8 text-center">
+                    <div class="text-blue-400 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 1.75L1.75 7.25v9.5L12 22.25l10.25-5.5v-9.5L12 1.75zm0 0L6.5 4.5M12 1.75L17.5 4.5M12 22.25V17M1.75 7.25l10.25 5.5 10.25-5.5M1.75 16.75L12 11.25M22.25 16.75L12 11.25M6.5 4.5l5.5 3 5.5-3M6.5 4.5v7.5l5.5 3v-7.5l-5.5-3zm11 0v7.5l-5.5 3v-7.5l5.5-3z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Exhibitions</h3>
+                    <p class="text-gray-400 text-sm">
+                        Designing and delivering impactful exhibition stands and environments.
+                    </p>
+                </div>
+                <div class="card p-8 text-center">
+                    <div class="text-blue-400 mb-4">
+                         <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.625 1.5c-1.074 0-1.94.866-1.94 1.94v3.122c0 .29.123.568.34.766l7.49 6.808a1.94 1.94 0 002.744 0l3.88-3.88a1.94 1.94 0 000-2.744L10.64 0.627a1.94 1.94 0 00-2.744 0L5.966.34A1.93 1.93 0 005.625 0M18.375 5.25a1.125 1.125 0 11-2.25 0 1.125 1.125 0 012.25 0zm-4.318 8.982L22.5 5.79V18.75a1.94 1.94 0 01-1.94 1.94H7.56a1.94 1.94 0 01-1.94-1.94V9.568l5.982 4.694a3.125 3.125 0 004.318 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Art Installations</h3>
+                    <p class="text-gray-400 text-sm">
+                        Creating thought-provoking and engaging art pieces for public and private spaces.
+                    </p>
+                </div>
+                <div class="card p-8 text-center">
+                     <div class="text-blue-400 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.375 2.25L10.06 9.375h10.88L15.375 2.25zm-3.375 0L6.75 9.375H.375L6.311 2.25h5.689zm0 9.375L6.75 18.75H.375L12 21.75l5.625-3H17.25l-5.25-7.125z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Experiential Marketing</h3>
+                    <p class="text-gray-400 text-sm">
+                        Building memorable brand interactions that connect with audiences.
+                    </p>
+                </div>
+                <div class="card p-8 text-center">
+                    <div class="text-blue-400 mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1.5 4.5v15h21V4.5H1.5zm3 1.5h1.5v1.5H4.5V6zm0 3h1.5v1.5H4.5V9zm0 3h1.5v1.5H4.5v-1.5zm0 3h1.5v1.5H4.5v-1.5zm3-7.5h10.5v7.5H7.5V6zM19.5 6h1.5v1.5h-1.5V6zm0 3h1.5v1.5h-1.5V9zm0 3h1.5v1.5h-1.5v-1.5zm0 3h1.5v1.5h-1.5v-1.5z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Film Production</h3>
+                    <p class="text-gray-400 text-sm">
+                        From concept to final cut, producing compelling visual narratives.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section"> 
+        <div class="container mx-auto">
+            <div class="about-section-content text-center md:text-left">
+                <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616720951066-U8P3CHYT2OD18RULW58Z/About+Us+Logo%402x.png?format=1500w" alt="The Opus Group - Our Fabrication Studio" class="about-section-logo mx-auto md:mx-0" onerror="this.src='https://placehold.co/250x150/1f2937/FFFFFF?text=Opus+Group+Logo'">
+                <div class="about-text-block">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Our Studio</h2>
+                    <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+                        A full service creative design and fabrication shop located in Los Angeles, California. We specialize in custom sculptural art, decorative art installations, film & television props, metal art, in-store marketing displays and immersive experiential and interactive environments.
+                    </p>
+                    <a href="#contact" class="btn btn-primary mt-6">Get In Touch</a> 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section bg-gray-900">
+        <div class="container mx-auto text-center max-w-3xl"> 
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's Create Something Amazing</h2>
+            <p class="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
+                Have a project in mind or want to learn more about our work? We'd love to hear from you.
+            </p>
+            
+            <form id="contactForm" class="contact-form space-y-6 text-left">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                    <input type="text" name="name" id="name" required class="block">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                    <input type="email" name="email" id="email" required class="block">
+                </div>
+                <div>
+                    <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+                    <input type="text" name="subject" id="subject" required class="block">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                    <textarea name="message" id="message" rows="4" required class="block"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary w-full md:w-auto">Send Message</button>
+                </div>
+            </form>
+            <div id="form-status-message" class="form-message hidden"></div>
+
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 py-12 text-center"> 
+        <div class="container mx-auto">
+            <p class="text-gray-500">&copy; <span id="currentYear"></span> The Opus Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if(mobileMenuButton && mobileMenu && closeMobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            });
+
+            closeMobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+        
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Simple fade-in on scroll observer for sections
+        const observerOptions = {
+            root: null, 
+            rootMargin: '0px', 
+            threshold: 0.1 
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        const elementsToAnimate = document.querySelectorAll('.fade-in-up');
+        elementsToAnimate.forEach(el => observer.observe(el));
+
+        // Hero Slideshow Functionality
+        const slidesContainer = document.getElementById('hero-slides-container');
+        if (slidesContainer) { 
+            const slides = slidesContainer.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+            const slideInterval = 5000; 
+
+            function nextSlide() {
+                if (slides.length > 0) { 
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+            }
+
+            if (slides.length > 1) { 
+                 setInterval(nextSlide, slideInterval);
+            } else if (slides.length === 1) { 
+                slides[0].classList.add('active');
+            }
+        }
+
+        // Contact Form Submission Feedback
+        const contactForm = document.getElementById('contactForm');
+        const formStatusMessage = document.getElementById('form-status-message');
+
+        if (contactForm && formStatusMessage) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent actual form submission for this demo
+
+                // Simulate form submission
+                formStatusMessage.classList.remove('hidden', 'success', 'error');
+                formStatusMessage.textContent = 'Sending...';
+
+                setTimeout(() => {
+                    // Simulate a successful submission
+                    formStatusMessage.classList.add('success');
+                    formStatusMessage.textContent = 'Thank you! Your message has been sent.';
+                    contactForm.reset(); // Clear the form
+
+                    // Hide the message after a few seconds
+                    setTimeout(() => {
+                        formStatusMessage.classList.add('hidden');
+                    }, 5000);
+
+                }, 1500);
+            });
+        }
+    </script>
+
+</body>
+</html>

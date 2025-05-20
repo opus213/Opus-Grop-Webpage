@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Tim Burton - Orb Monster - The Opus Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark background */
+            color: #F3F4F6; /* Light text */
+            overflow-x: hidden;
+            position: relative; 
+        }
+
+        /* Background Watermark Logo (Optional) */
+        /*
+        body::before {
+            content: "";
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('YOUR_WATERMARK_LOGO_URL_HERE'); 
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 60vw; 
+            opacity: 0.03; 
+            z-index: 0; 
+            pointer-events: none; 
+        }
+        */
+
+        .header-logo {
+            max-height: 60px; 
+            width: auto;
+        }
+        .project-hero {
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative; 
+            z-index: 1; 
+        }
+        .project-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+        }
+        .project-title-hero {
+            position: relative;
+            z-index: 2; 
+        }
+        .content-section {
+            padding-top: 3rem; 
+            padding-bottom: 3rem; 
+            position: relative; 
+            z-index: 1; 
+            background-color: rgba(17, 24, 39, 0.85); 
+        }
+        
+        /* Multi-Item Peek Carousel Styles */
+        .carousel-viewport {
+            position: relative;
+            width: 100%;
+            max-width: 900px; 
+            margin: 2rem auto 2.5rem auto;
+            overflow: hidden; 
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.20);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out; 
+        }
+
+        .carousel-slide {
+            flex: 0 0 33.333%; 
+            padding: 0 10px; 
+            box-sizing: border-box;
+            opacity: 0.5; 
+            transform: scale(0.8); 
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            position: relative; 
+            z-index: 1;
+        }
+
+        .carousel-slide.active-slide {
+            opacity: 1;
+            transform: scale(1); 
+            z-index: 3; 
+        }
+
+        .carousel-slide.adjacent-slide { 
+            opacity: 0.7;
+            transform: scale(0.9); 
+            z-index: 2;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 350px; 
+            object-fit: cover; 
+            display: block;
+            border-radius: 0.5rem; 
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0.5rem; 
+            box-sizing: border-box; 
+            z-index: 10; 
+        }
+
+        .carousel-arrow {
+            background-color: rgba(20, 20, 20, 0.7);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 50%; 
+            cursor: pointer;
+            font-size: 1.5rem; 
+            transition: background-color 0.2s ease;
+            line-height: 1;
+            width: 40px; 
+            height: 40px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        .project-description-block {
+            margin-top: 2rem; 
+        }
+        .prose h3 { 
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            color: #93C5FD; /* Tailwind blue-300 */
+            margin-top: 1.5rem; /* mt-6 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5rem; 
+            color: #D1D5DB; /* gray-300 */
+        }
+        .prose ul li {
+            margin-bottom: 0.25rem; 
+        }
+        .prose p {
+            line-height: 1.75; 
+            margin-bottom: 1rem; 
+        }
+
+        .sidebar-info {
+            background-color: rgba(31, 41, 55, 0.85); 
+            padding: 1.5rem; 
+            border-radius: 0.75rem;
+        }
+        .sidebar-info h3 {
+            font-size: 1.25rem; 
+            font-weight: 600;
+            color: #60A5FA; 
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid #374151; 
+            padding-bottom: 0.5rem;
+        }
+        .sidebar-info ul li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem; 
+        }
+        .sidebar-info strong {
+            color: #D1D5DB; 
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            display: inline-block; 
+        }
+        .btn-primary {
+            background-color: #3B82F6; 
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+         .btn-secondary {
+            background-color: transparent;
+            color: #F3F4F6;
+            border: 1px solid #4B5563; 
+        }
+        .btn-secondary:hover {
+            background-color: #374151; 
+        }
+        .mobile-menu {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(17, 24, 39, 0.95); 
+            z-index: 50;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mobile-menu a {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #F3F4F6;
+        }
+        .mobile-menu.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="block">
+                <img src="https://static1.squarespace.com/static/5e75ac32c6eb1c6791a31b50/t/61ddc004b058a12026e7dba1/1641922565639/Logo-Name.png" alt="The Opus Group Logo" class="header-logo">
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="index.html#work" class="hover:text-blue-400 transition-colors">Work</a>
+                <a href="index.html#expertise" class="hover:text-blue-400 transition-colors">Expertise</a>
+                <a href="index.html#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="close-mobile-menu-button" class="absolute top-6 right-6 text-white focus:outline-none">
+             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a href="index.html#work" class="mobile-nav-link">Work</a>
+        <a href="index.html#expertise" class="mobile-nav-link">Expertise</a>
+        <a href="index.html#about" class="mobile-nav-link">About</a>
+        <a href="index.html#contact" class="mt-4 btn btn-primary mobile-nav-link">Contact Us</a>
+    </div>
+
+    <main>
+        <section class="project-hero" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616739177986-1RRNHD0R53UEEXUG9B4F/20191014_072016+copy.jpg');">
+            <div class="project-hero-overlay"></div>
+            <div class="project-title-hero">
+                <h1 class="text-4xl md:text-6xl font-bold text-white">Tim Burton: Orb Monster</h1>
+            </div>
+        </section>
+
+        <section class="content-section"> 
+            <div class="container mx-auto max-w-6xl px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                    
+                    <div class="lg:col-span-8">
+                        <h2 class="text-3xl font-semibold text-blue-400 mt-0 mb-8 text-center lg:text-left">Visual Journey</h2>
+                        <div id="orb-monster-carousel" class="carousel-viewport">
+                            <div class="carousel-track">
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/74b6a546-ad47-4eac-af26-ee3f4526fd93/1%29+sketch.JPG" alt="Orb Monster Sketch" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Sketch+Not+Found'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/80391ee1-aaac-45dc-94fa-f533a1360715/3%29+3d+print.JPG" alt="3D Printed Model" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=3D+Model+Not+Found'">
+                                </div>
+                                 <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/e8ff7049-e502-4c06-82d5-ba73b5e04414/4%29+color+rendering.JPG" alt="Color Rendering" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Rendering+Not+Found'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/ba8b757c-1da5-42f6-a438-ac41c1f8b326/8%29+3+legs.JPG" alt="Steel Frame Structure" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Frame+Not+Found'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/43930d66-512e-4a97-a858-8eefdd9051b1/10%29+ribs.JPG" alt="CNC Plasma Cut Ribs and Teeth" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=CNC+Parts+Not+Found'">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/3117e6d2-6ea0-4a77-ae58-cc09140a8be4/17%29+crane+assembly.JPG" alt="Crane Assembly on Site" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Assembly+Not+Found'">
+                                </div>
+                                 <div class="carousel-slide">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/07fe21cd-418b-42e7-852e-2b97adee1508/20%29+daytime+shot.jpg" alt="Final Orb Monster Installation" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Final+Shot+Not+Found'">
+                                </div>
+                            </div>
+                            <div class="carousel-nav">
+                                <button class="carousel-arrow prev-slide" aria-label="Previous image">&#10094;</button>
+                                <button class="carousel-arrow next-slide" aria-label="Next image">&#10095;</button>
+                            </div>
+                        </div>
+                        
+                        <div class="project-description-block">
+                            <h2 class="text-3xl font-semibold text-blue-400 mb-6">Fabricating a Monster: The Orb for Tim Burton</h2>
+                            <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
+                                <p class="leading-relaxed">
+                                    The client, Tim Burton and The Neon Museum, presented us with a 1/16th scale model of the "Orb Monster" sculpture for display in Las Vegas. Given creative freedom with materials, we embarked on a journey to bring this unique vision to life.
+                                </p>
+                                <h3>Our Approach:</h3>
+                                <ul class="leading-relaxed">
+                                    <li><strong>Scaling & Design:</strong> We meticulously scaled the client's model, creating detailed construction drawings and color renderings for precise color palette selection and client approval.</li>
+                                    <li><strong>Material Innovation:</strong> The sculpture was crafted from a robust steel structure, with foam details meticulously shaped and attached. The final pieces utilized a strong, waterproof two-part epoxy for a high-finish, durable surface.</li>
+                                    <li><strong>Precision Fabrication:</strong> CNC plasma cutting was employed for accurate "rib legs" and teeth profiles, staying true to the original miniature.</li>
+                                    <li><strong>Integrated Technology:</strong> iPad-controlled lighting was seamlessly integrated, designed for a 12-hour loop to meet the museum's specific operational requirements.</li>
+                                    <li><strong>Complex Installation:</strong> The sculpture's components, including its tall legs, were assembled on-site using an extension boom lift for welding and finishing, with epoxy putty ensuring seamless joints.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="lg:col-span-4">
+                        <div class="sidebar-info sticky top-28">
+                            <h3>Project Details</h3>
+                            <ul class="text-gray-300">
+                                <li><strong>Client:</strong> Tim Burton and The Neon Museum</li>
+                                <li><strong>Location:</strong> The Neon Museum, Las Vegas</li>
+                                <li><strong>Services:</strong></li>
+                                <li class="ml-4">- Design & Conceptualization</li>
+                                <li class="ml-4">- 3D Modeling & Color Renderings</li>
+                                <li class="ml-4">- Steel Fabrication & CNC Machining</li>
+                                <li class="ml-4">- Foam Sculpting & Epoxy Finishing</li>
+                                <li class="ml-4">- Lighting Design & Integration</li>
+                                <li class="ml-4">- On-Site Installation & Logistics</li>
+                            </ul>
+                            <h3 class="mt-8">Key Features</h3>
+                             <ul class="text-gray-300">
+                                <li>Collaboration with Tim Burton</li>
+                                <li>Scaled from Miniature Model</li>
+                                <li>Durable Steel & Epoxy Construction</li>
+                                <li>iPad-Controlled Lighting System</li>
+                                <li>Seamless On-Site Assembly</li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+                 <div class="text-center mt-16">
+                    <a href="index.html#work" class="btn btn-secondary text-lg">Back to Our Work</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 py-12 text-center"> 
+        <div class="container mx-auto">
+            <p class="text-gray-500">&copy; <span id="currentYear"></span> The Opus Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if(mobileMenuButton && mobileMenu && closeMobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            });
+
+            closeMobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+        
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Project Carousel Functionality (reusable for multiple carousels)
+        function setupCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            if (carousel) {
+                const track = carousel.querySelector('.carousel-track');
+                const slides = Array.from(track.children);
+                const nextButton = carousel.querySelector('.next-slide');
+                const prevButton = carousel.querySelector('.prev-slide');
+                
+                let currentIndex = 0;
+
+                function updateSlideStyling() {
+                    slides.forEach((slide, i) => {
+                        slide.classList.remove('active-slide', 'adjacent-slide');
+                        if (i === currentIndex) {
+                            slide.classList.add('active-slide');
+                        } else if (slides.length > 1 && (i === (currentIndex + 1) % slides.length || i === (currentIndex - 1 + slides.length) % slides.length)) {
+                            slide.classList.add('adjacent-slide');
+                        }
+                    });
+                }
+
+                function moveToSlide(index) {
+                    if (slides.length === 0) return;
+                    
+                    const viewport = carousel; 
+                    const viewportWidth = viewport.offsetWidth;
+                    
+                    const slideElementWidth = slides[0].offsetWidth; 
+                    const slideStyle = window.getComputedStyle(slides[0]);
+                    const marginLeft = parseFloat(slideStyle.marginLeft);
+                    const marginRight = parseFloat(slideStyle.marginRight);
+                    const slideEffectiveWidth = slideElementWidth + marginLeft + marginRight;
+
+                    const targetSlideCenterInTrack = (index * slideEffectiveWidth) + (slideElementWidth / 2) + marginLeft;
+                    const viewportCenter = viewportWidth / 2;
+                    
+                    const transformX = viewportCenter - targetSlideCenterInTrack;
+                    
+                    track.style.transform = `translateX(${transformX}px)`;
+                    currentIndex = index;
+                    updateSlideStyling();
+                }
+
+                if (slides.length > 0) {
+                    const initCarousel = () => moveToSlide(currentIndex);
+                    window.addEventListener('load', () => setTimeout(initCarousel, 100));
+                    window.addEventListener('resize', initCarousel);
+
+                    nextButton.addEventListener('click', () => {
+                        const nextIndex = (currentIndex + 1) % slides.length;
+                        moveToSlide(nextIndex);
+                    });
+
+                    prevButton.addEventListener('click', () => {
+                        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                        moveToSlide(prevIndex);
+                    });
+                }
+            }
+        }
+        
+        // Initialize carousels by their ID
+        setupCarousel('orb-monster-carousel'); 
+
+    </script>
+
+</body>
+</html>
