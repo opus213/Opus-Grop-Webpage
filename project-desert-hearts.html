@@ -9,13 +9,12 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark background */
-            color: #F3F4F6; /* Light text */
+            background-color: #111827; 
+            color: #F3F4F6; 
             overflow-x: hidden;
             position: relative; 
         }
 
-        /* Background Watermark Logo */
         body::before {
             content: "";
             position: fixed; 
@@ -23,7 +22,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/1616720951066-U8P3CHYT2OD18RULW58Z/About+Us+Logo%402x.png?format=1500w'); /* Graphical logo */
+            background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/About-Us-Logo.png'); 
             background-repeat: no-repeat;
             background-position: center center;
             background-size: 60vw; 
@@ -67,7 +66,6 @@
             background-color: rgba(17, 24, 39, 0.85); 
         }
         
-        /* Multi-Item Peek Carousel Styles */
         .carousel-viewport {
             position: relative;
             width: 100%;
@@ -150,16 +148,16 @@
             margin-top: 2rem; 
         }
         .prose h3 { 
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 600; /* semibold */
-            color: #93C5FD; /* Tailwind blue-300 */
-            margin-top: 1.5rem; /* mt-6 */
-            margin-bottom: 0.75rem; /* mb-3 */
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            color: #93C5FD; 
+            margin-top: 1.5rem; 
+            margin-bottom: 0.75rem; 
         }
         .prose ul {
             list-style-type: disc;
             padding-left: 1.5rem; 
-            color: #D1D5DB; /* gray-300 */
+            color: #D1D5DB; 
         }
         .prose ul li {
             margin-bottom: 0.25rem; 
@@ -170,7 +168,7 @@
         }
 
         .sidebar-info {
-            background-color: rgba(31, 41, 55, 0.85); /* Slightly transparent background */
+            background-color: rgba(31, 41, 55, 0.85); 
             padding: 1.5rem; 
             border-radius: 0.75rem;
         }
@@ -240,7 +238,7 @@
     <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="block">
-                <img src="https://static1.squarespace.com/static/5e75ac32c6eb1c6791a31b50/t/61ddc004b058a12026e7dba1/1641922565639/Logo-Name.png" alt="The Opus Group Logo" class="header-logo">
+                <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Logo-Name.png" alt="The Opus Group Logo" class="header-logo" onerror="this.src='https://placehold.co/200x60/1f2937/FFFFFF?text=Logo'">
             </a>
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="index.html#work" class="hover:text-blue-400 transition-colors">Work</a>
@@ -269,7 +267,7 @@
     </div>
 
     <main>
-        <section class="project-hero" style="background-image: url('https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/c8b1b5e4-c80b-47b2-ad28-d805d1a48d67/30%29+night+show.jpg?format=1500w');">
+        <section class="project-hero" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/desert-hearts-hero-night.png');">
             <div class="project-hero-overlay"></div>
             <div class="project-title-hero">
                 <h1 class="text-4xl md:text-6xl font-bold text-white">Desert Hearts Stage</h1>
@@ -285,22 +283,22 @@
                         <div id="desert-hearts-carousel" class="carousel-viewport">
                             <div class="carousel-track">
                                 <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/5e6f3f09-fa29-4bba-a534-e41c490cf876/4%29+rendering+white+background.png?format=1500w" alt="Desert Hearts Stage Rendering" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Rendering'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/desert-hearts-rendering.png" alt="Desert Hearts Stage Rendering" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Rendering'">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/aac2e9d5-a63d-4d87-a775-7a1a4527f005/3%29+DH+cad+edited.jpg?format=1500w" alt="Desert Hearts CAD Model" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=CAD+Model'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Desert-Hearts-CAD-Model.jpg" alt="Desert Hearts CAD Model" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=CAD+Model'">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/27a7a207-2fda-4849-96c4-a41a2249af52/24a%29+electrical+installation.jpg?format=1500w" alt="Electrical Installation" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Electrical'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Electrical-Installation.jpg" alt="Electrical Installation" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Electrical'">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/a6eb2137-b0e4-4056-a912-b39ee0f0806c/22a%29+blacklight+resin+.JPG?format=1500w" alt="Blacklight Resin Paint" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=UV+Paint'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Blacklight-Resin%20Paint.jpg" alt="Blacklight Resin Paint" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=UV+Paint'">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/8a6f2411-b091-4317-a126-950db6067d76/26%29+Installation+.jpg?format=1500w" alt="Stage Installation" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Installation'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Stage-Installation.jpg" alt="Stage Installation" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Installation'">
                                 </div>
                                  <div class="carousel-slide">
-                                    <img src="https://images.squarespace-cdn.com/content/v1/5e75ac32c6eb1c6791a31b50/c8b1b5e4-c80b-47b2-ad28-d805d1a48d67/30%29+night+show.jpg?format=1500w" alt="Desert Hearts Stage Night Show" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Night+Show'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Desert-Hearts%20Stage-Night-Show.jpg" alt="Desert Hearts Stage Night Show" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Night+Show'">
                                 </div>
                             </div>
                             <div class="carousel-nav">
