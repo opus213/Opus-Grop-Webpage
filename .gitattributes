@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+git add videos/
+git commit -m "Add videos folder"
+git push
+git add .gitattributes
