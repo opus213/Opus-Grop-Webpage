@@ -12,41 +12,41 @@
             background-color: #111827; /* Dark background */
             color: #F3F4F6; /* Light text */
             overflow-x: hidden;
-            position: relative; 
+            position: relative;
         }
 
-        /* Background Watermark Logo - Updated to GitHub path */
+        /* Background Watermark Logo */
         body::before {
             content: "";
-            position: fixed; 
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/opus-logo-icon.png'); 
+            background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/opus-logo-icon.png');
             background-repeat: no-repeat;
             background-position: center center;
-            background-size: 60vw; 
-            opacity: 0.07; 
-            z-index: 0; 
-            pointer-events: none; 
+            background-size: 60vw;
+            opacity: 0.07;
+            z-index: 0;
+            pointer-events: none;
         }
-        
+
 
         .header-logo {
-            max-height: 60px; 
+            max-height: 60px;
             width: auto;
         }
         .project-hero {
-            height: 60vh; /* Adjusted from 70vh for potentially better mobile hero */
+            height: 60vh;
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative; 
-            z-index: 1; 
+            position: relative;
+            z-index: 1;
         }
         .project-hero-overlay {
             position: absolute;
@@ -58,63 +58,67 @@
         }
         .project-title-hero {
             position: relative;
-            z-index: 2; 
+            z-index: 2;
         }
         .content-section {
-            padding-top: 3rem; 
-            padding-bottom: 3rem; 
-            position: relative; 
-            z-index: 1; 
-            background-color: rgba(17, 24, 39, 0.85); 
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(17, 24, 39, 0.85);
         }
-        
+
         /* Multi-Item Peek Carousel Styles */
         .carousel-viewport {
             position: relative;
             width: 100%;
-            max-width: 900px; 
+            max-width: 900px;
             margin: 2rem auto 2.5rem auto;
-            overflow: hidden; 
+            overflow: hidden;
             border-radius: 0.75rem;
             box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.20);
         }
 
         .carousel-track {
             display: flex;
-            transition: transform 0.5s ease-in-out; 
+            transition: transform 0.5s ease-in-out;
         }
 
         .carousel-slide {
             flex: 0 0 33.333%; /* Default for larger screens */
-            padding: 0 10px; 
+            padding: 0 10px;
             box-sizing: border-box;
-            opacity: 0.5; 
-            transform: scale(0.8); 
+            opacity: 0.5;
+            transform: scale(0.8);
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            position: relative; 
+            position: relative;
             z-index: 1;
         }
 
         .carousel-slide.active-slide {
             opacity: 1;
-            transform: scale(1); 
-            z-index: 3; 
+            transform: scale(1);
+            z-index: 3;
         }
 
-        .carousel-slide.adjacent-slide { 
+        .carousel-slide.adjacent-slide {
             opacity: 0.7;
-            transform: scale(0.9); 
+            transform: scale(0.9);
             z-index: 2;
         }
 
         .carousel-slide img {
             width: 100%;
             height: 350px; /* Default height for larger screens */
-            object-fit: cover; 
+            object-fit: cover;
             display: block;
-            border-radius: 0.5rem; 
+            border-radius: 0.5rem;
         }
-        
+         /* Add cursor for lightbox */
+        .carousel-img.cursor-zoom-in {
+            cursor: zoom-in;
+        }
+
         .carousel-nav {
             position: absolute;
             top: 50%;
@@ -122,9 +126,9 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 0.5rem; 
-            box-sizing: border-box; 
-            z-index: 10; 
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+            z-index: 10;
         }
 
         .carousel-arrow {
@@ -132,13 +136,13 @@
             color: white;
             border: none;
             padding: 0.75rem;
-            border-radius: 50%; 
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 1.5rem; 
+            font-size: 1.5rem;
             transition: background-color 0.2s ease;
             line-height: 1;
-            width: 40px; 
-            height: 40px; 
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -146,7 +150,7 @@
         .carousel-arrow:hover {
             background-color: rgba(0, 0, 0, 0.9);
         }
-        
+
         /* Mobile adjustments for carousel */
         @media (max-width: 767px) {
             .carousel-slide {
@@ -162,49 +166,48 @@
         }
 
 
-        .project-description-block { 
-            margin-top: 2rem; 
+        .project-description-block {
+            margin-top: 2rem;
         }
-        .prose h3 { 
-            font-size: 1.25rem; 
-            font-weight: 600; 
-            color: #93C5FD; 
-            margin-top: 1.5rem; 
-            margin-bottom: 0.75rem; 
+        .prose h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #93C5FD;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
         }
          .prose p, .prose ul {
-            line-height: 1.75; 
-            margin-bottom: 1rem; 
-            color: #D1D5DB; 
+            line-height: 1.75;
+            margin-bottom: 1rem;
+            color: #D1D5DB;
         }
         .prose ul {
             list-style-type: disc;
-            padding-left: 1.5rem; 
+            padding-left: 1.5rem;
         }
         .prose ul li {
-            margin-bottom: 0.25rem; 
+            margin-bottom: 0.25rem;
         }
 
-
         .sidebar-info {
-            background-color: rgba(31, 41, 55, 0.85); 
-            padding: 1.5rem; 
+            background-color: rgba(31, 41, 55, 0.85);
+            padding: 1.5rem;
             border-radius: 0.75rem;
         }
         .sidebar-info h3 {
-            font-size: 1.25rem; 
+            font-size: 1.25rem;
             font-weight: 600;
-            color: #60A5FA; 
+            color: #60A5FA;
             margin-bottom: 0.75rem;
-            border-bottom: 1px solid #374151; 
+            border-bottom: 1px solid #374151;
             padding-bottom: 0.5rem;
         }
         .sidebar-info ul li {
             margin-bottom: 0.5rem;
-            font-size: 0.95rem; 
+            font-size: 0.95rem;
         }
         .sidebar-info strong {
-            color: #D1D5DB; 
+            color: #D1D5DB;
         }
 
         .btn {
@@ -212,10 +215,10 @@
             border-radius: 0.5rem;
             font-weight: 600;
             transition: background-color 0.3s ease;
-            display: inline-block; 
+            display: inline-block;
         }
         .btn-primary {
-            background-color: #3B82F6; 
+            background-color: #3B82F6;
             color: white;
         }
         .btn-primary:hover {
@@ -224,19 +227,19 @@
          .btn-secondary {
             background-color: transparent;
             color: #F3F4F6;
-            border: 1px solid #4B5563; 
+            border: 1px solid #4B5563;
         }
         .btn-secondary:hover {
-            background-color: #374151; 
+            background-color: #374151;
         }
         .mobile-menu {
-            display: none; 
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(17, 24, 39, 0.95); 
+            background-color: rgba(17, 24, 39, 0.95);
             z-index: 50;
             flex-direction: column;
             align-items: center;
@@ -249,6 +252,14 @@
         }
         .mobile-menu.active {
             display: flex;
+        }
+        /* Lightbox CSS Tweaks */
+        #lightbox {
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -293,25 +304,25 @@
             </div>
         </section>
 
-        <section class="content-section"> 
+        <section class="content-section">
             <div class="container mx-auto max-w-6xl px-4">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-                    
+
                     <div class="lg:col-span-8">
                         <h2 class="text-3xl font-semibold text-blue-400 mt-0 mb-8 text-center lg:text-left">Visual Journey</h2>
                         <div id="lil-uzi-vert-carousel" class="carousel-viewport">
                             <div class="carousel-track">
                                 <div class="carousel-slide">
-                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/lil-uzi-foam-shaping.png" alt="Foam Shaping" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Foam+Shaping'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/lil-uzi-foam-shaping.png" alt="Foam Shaping" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Foam+Shaping'" class="carousel-img cursor-zoom-in">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/lil-uzi-skull-finished.jpg" alt="Finished Skull" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Skull+Finished'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/lil-uzi-skull-finished.jpg" alt="Finished Skull" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Skull+Finished'" class="carousel-img cursor-zoom-in">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/lil-uzi-skull-in-crate.jpg" alt="Skull in Crate / 3D Model" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=3D+Model'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/lil-uzi-skull-in-crate.jpg" alt="Skull in Crate / 3D Model" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=3D+Model'" class="carousel-img cursor-zoom-in">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-iheartradio-stage.jpg" alt="Skull on Stage" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Stage+Shot'">
+                                    <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-iheartradio-stage.jpg" alt="Skull on Stage" onerror="this.src='https://placehold.co/600x450/1f2937/FFFFFF?text=Stage+Shot'" class="carousel-img cursor-zoom-in">
                                 </div>
                             </div>
                             <div class="carousel-nav">
@@ -319,7 +330,7 @@
                                 <button class="carousel-arrow next-slide" aria-label="Next image">&#10095;</button>
                             </div>
                         </div>
-                        
+
                         <div class="project-description-block">
                             <h2 class="text-3xl font-semibold text-blue-400 mb-6">Crafting a Touring Icon: Lil Uzi Vert's Skull Stage</h2>
                             <div class="prose prose-invert max-w-none text-gray-300 space-y-4">
@@ -367,11 +378,18 @@
         </section>
     </main>
 
-    <footer class="bg-gray-900 py-12 text-center"> 
+    <footer class="bg-gray-900 py-12 text-center">
         <div class="container mx-auto">
             <p class="text-gray-500">&copy; <span id="currentYear"></span> The Opus Group. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
+        <button id="lightbox-prev" class="absolute left-4 md:left-6 text-white text-3xl md:text-4xl font-bold hover:text-blue-400 focus:outline-none p-2">&#10094;</button>
+        <img id="lightbox-img" src="" alt="Enlarged image" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-xl">
+        <button id="lightbox-next" class="absolute right-4 md:right-6 text-white text-3xl md:text-4xl font-bold hover:text-blue-400 focus:outline-none p-2">&#10095;</button>
+        <button id="lightbox-close" class="absolute top-4 right-4 md:top-6 md:right-6 text-white text-2xl md:text-3xl font-bold hover:text-red-500 focus:outline-none p-2">&times;</button>
+    </div>
 
     <script>
         // Mobile Menu Toggle
@@ -383,7 +401,7 @@
         if(mobileMenuButton && mobileMenu && closeMobileMenuButton) {
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.add('active');
-                document.body.style.overflow = 'hidden'; 
+                document.body.style.overflow = 'hidden';
             });
 
             closeMobileMenuButton.addEventListener('click', () => {
@@ -398,74 +416,154 @@
                 });
             });
         }
-        
+
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Project Carousel Functionality (reusable for multiple carousels)
+        // Project Carousel Functionality
         function setupCarousel(carouselId) {
             const carousel = document.getElementById(carouselId);
-            if (carousel) {
-                const track = carousel.querySelector('.carousel-track');
-                const slides = Array.from(track.children);
-                const nextButton = carousel.querySelector('.next-slide');
-                const prevButton = carousel.querySelector('.prev-slide');
-                
-                let currentIndex = 0;
+            if (!carousel) return;
+            const track = carousel.querySelector('.carousel-track');
+            const slides = Array.from(track.children);
+            const nextButton = carousel.querySelector('.next-slide');
+            const prevButton = carousel.querySelector('.prev-slide');
+            let currentIndex = 0;
 
-                function updateSlideStyling() {
-                    slides.forEach((slide, i) => {
-                        slide.classList.remove('active-slide', 'adjacent-slide');
-                        if (i === currentIndex) {
-                            slide.classList.add('active-slide');
-                        } else if (slides.length > 1 && (i === (currentIndex + 1) % slides.length || i === (currentIndex - 1 + slides.length) % slides.length)) {
-                            slide.classList.add('adjacent-slide');
-                        }
-                    });
+            function updateSlideStyling() {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active-slide', 'adjacent-slide');
+                    if (i === currentIndex) slide.classList.add('active-slide');
+                    else if (slides.length > 1 && (i === (currentIndex + 1) % slides.length || i === (currentIndex - 1 + slides.length) % slides.length)) {
+                        slide.classList.add('adjacent-slide');
+                    }
+                });
+            }
+
+            function moveToSlide(index) {
+                if (slides.length === 0) return;
+                const viewportWidth = carousel.offsetWidth;
+                const slideElementWidth = slides[0].offsetWidth;
+                const slideStyle = window.getComputedStyle(slides[0]);
+                const marginLeft = parseFloat(slideStyle.marginLeft) || 0;
+                const marginRight = parseFloat(slideStyle.marginRight) || 0;
+                const slideEffectiveWidth = slideElementWidth + marginLeft + marginRight;
+                const targetSlideCenterInTrack = (index * slideEffectiveWidth) + (slideElementWidth / 2) + marginLeft;
+                const viewportCenter = viewportWidth / 2;
+                track.style.transform = `translateX(${viewportCenter - targetSlideCenterInTrack}px)`;
+                currentIndex = index;
+                updateSlideStyling();
+            }
+
+            if (slides.length > 0) {
+                const initCarousel = () => moveToSlide(currentIndex);
+                if (document.readyState === 'loading') {
+                    window.addEventListener('DOMContentLoaded', () => setTimeout(initCarousel, 100));
+                } else {
+                    setTimeout(initCarousel, 100);
                 }
+                window.addEventListener('resize', initCarousel);
+                nextButton.addEventListener('click', () => moveToSlide((currentIndex + 1) % slides.length));
+                prevButton.addEventListener('click', () => moveToSlide((currentIndex - 1 + slides.length) % slides.length));
+            }
+        }
+        setupCarousel('lil-uzi-vert-carousel');
 
-                function moveToSlide(index) {
-                    if (slides.length === 0) return;
-                    
-                    const viewport = carousel; 
-                    const viewportWidth = viewport.offsetWidth;
-                    
-                    const slideElementWidth = slides[0].offsetWidth; 
-                    const slideStyle = window.getComputedStyle(slides[0]);
-                    const marginLeft = parseFloat(slideStyle.marginLeft);
-                    const marginRight = parseFloat(slideStyle.marginRight);
-                    const slideEffectiveWidth = slideElementWidth + marginLeft + marginRight;
+        // Enhanced Lightbox Logic (with Navigation and Swipe)
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxNext = document.getElementById('lightbox-next');
+        const lightboxPrev = document.getElementById('lightbox-prev');
 
-                    const targetSlideCenterInTrack = (index * slideEffectiveWidth) + (slideElementWidth / 2) + marginLeft;
-                    const viewportCenter = viewportWidth / 2;
-                    
-                    const transformX = viewportCenter - targetSlideCenterInTrack;
-                    
-                    track.style.transform = `translateX(${transformX}px)`;
-                    currentIndex = index;
-                    updateSlideStyling();
+        let currentLightboxImageSet = [];
+        let currentLightboxIndex = 0;
+
+        function openLightbox(index, imageElements) {
+            if (!imageElements || imageElements.length === 0) return;
+            currentLightboxImageSet = imageElements;
+            currentLightboxIndex = index;
+            lightboxImg.src = currentLightboxImageSet[currentLightboxIndex].src;
+            lightboxImg.alt = currentLightboxImageSet[currentLightboxIndex].alt || "Enlarged image";
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        function showNext() {
+            if (currentLightboxImageSet.length === 0) return;
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImageSet.length;
+            lightboxImg.src = currentLightboxImageSet[currentLightboxIndex].src;
+            lightboxImg.alt = currentLightboxImageSet[currentLightboxIndex].alt || "Enlarged image";
+        }
+
+        function showPrev() {
+            if (currentLightboxImageSet.length === 0) return;
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImageSet.length) % currentLightboxImageSet.length;
+            lightboxImg.src = currentLightboxImageSet[currentLightboxIndex].src;
+            lightboxImg.alt = currentLightboxImageSet[currentLightboxIndex].alt || "Enlarged image";
+        }
+
+        const carouselImagesLilUzi = Array.from(document.querySelectorAll('#lil-uzi-vert-carousel .carousel-img'));
+        carouselImagesLilUzi.forEach((img, i) => {
+            img.addEventListener('click', () => openLightbox(i, carouselImagesLilUzi));
+        });
+
+        if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+        if (lightboxNext) lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+        if (lightboxPrev) lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) {
+                    closeLightbox();
                 }
+            });
+        }
 
-                if (slides.length > 0) {
-                    const initCarousel = () => moveToSlide(currentIndex);
-                    window.addEventListener('load', () => setTimeout(initCarousel, 100));
-                    window.addEventListener('resize', initCarousel);
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') showNext();
+                else if (e.key === 'ArrowLeft') showPrev();
+                else if (e.key === 'Escape') closeLightbox();
+            }
+        });
 
-                    nextButton.addEventListener('click', () => {
-                        const nextIndex = (currentIndex + 1) % slides.length;
-                        moveToSlide(nextIndex);
-                    });
+        // Swipe support for lightbox
+        let touchStartX = 0;
+        let touchEndX = 0;
 
-                    prevButton.addEventListener('click', () => {
-                        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-                        moveToSlide(prevIndex);
-                    });
+        function handleSwipeGesture() {
+            const swipeThreshold = 50; // minimum px distance for a valid swipe
+            const distance = touchEndX - touchStartX;
+
+            if (Math.abs(distance) > swipeThreshold) {
+                if (distance < 0) {
+                    // Swiped left
+                    showNext();
+                } else {
+                    // Swiped right
+                    showPrev();
                 }
             }
         }
-        
-        // Initialize carousels by their ID
-        setupCarousel('lil-uzi-vert-carousel'); 
+        if (lightbox) {
+            lightbox.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX;
+                }
+            }, { passive: true });
 
+            lightbox.addEventListener('touchend', (e) => {
+                if (e.changedTouches.length === 1) {
+                    touchEndX = e.changedTouches[0].clientX;
+                    handleSwipeGesture();
+                }
+            }, { passive: true });
+        }
     </script>
 
 </body>
