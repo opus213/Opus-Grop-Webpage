@@ -16,15 +16,16 @@
 
         /* Header Logo Style */
         .header-logo {
-            max-height: 60px; 
+            max-height: 60px;
             width: auto;
         }
 
         /* Hero Section Styles */
         .hero-section {
-            height: 100vh; 
-            position: relative; 
-            overflow: hidden; 
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background-color: #111827; /* Fallback for video loading */
         }
 
         .hero-slide {
@@ -33,52 +34,69 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out; 
-            z-index: 1; 
+            transition: opacity 1.2s ease-in-out;
+            z-index: 1;
         }
 
         .hero-slide.active {
             opacity: 1;
-            z-index: 2; 
+            z-index: 2;
         }
 
+        .hero-slide video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover; /* Ensure video covers the area */
+            z-index: 1; /* Video itself */
+        }
+         /* Fallback for hero slides if video doesn't load or for image slides */
+        .hero-slide-image {
+            background-size: cover;
+            background-position: center;
+        }
+
+
         .hero-content {
-            position: relative; 
-            z-index: 3; 
+            position: relative;
+            z-index: 3;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            height: 100%; 
-            padding: 1.5rem; 
+            height: 100%;
+            padding: 1.5rem;
         }
-        
+
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); 
-            z-index: 2; 
+            background-color: rgba(0, 0, 0, 0.65); /* Slightly increased opacity for better text contrast on video */
+            z-index: 2;
         }
 
         .section {
-            padding: 80px 20px; 
-            min-height: 70vh; 
+            padding: 80px 20px;
+            min-height: 70vh;
         }
         .gallery-item {
-            height: 400px; 
+            height: 400px;
             background-size: cover;
             background-position: center;
         }
         .card {
-            background-color: #1F2937; 
-            border-radius: 0.75rem; 
+            background-color: #1F2937;
+            border-radius: 0.75rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
@@ -92,7 +110,7 @@
             transition: background-color 0.3s ease;
         }
         .btn-primary {
-            background-color: #3B82F6; 
+            background-color: #3B82F6;
             color: white;
         }
         .btn-primary:hover {
@@ -101,10 +119,10 @@
         .btn-secondary {
             background-color: transparent;
             color: #F3F4F6;
-            border: 1px solid #4B5563; 
+            border: 1px solid #4B5563;
         }
         .btn-secondary:hover {
-            background-color: #374151; 
+            background-color: #374151;
         }
         .fade-in-up {
             opacity: 0;
@@ -116,13 +134,13 @@
             transform: translateY(0);
         }
         .mobile-menu {
-            display: none; 
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(17, 24, 39, 0.95); 
+            background-color: rgba(17, 24, 39, 0.95);
             z-index: 50;
             flex-direction: column;
             align-items: center;
@@ -140,40 +158,40 @@
         /* About Section Logo Style */
         .about-section-content {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             align-items: center;
-            gap: 2rem; 
+            gap: 2rem;
         }
-        @media (min-width: 768px) { 
+        @media (min-width: 768px) {
             .about-section-content {
-                flex-direction: row; 
+                flex-direction: row;
                 text-align: left;
             }
         }
         .about-section-logo {
-            max-width: 250px; 
+            max-width: 250px;
             width: 100%;
             height: auto;
-            margin-bottom: 1rem; 
+            margin-bottom: 1rem;
         }
         @media (min-width: 768px) {
              .about-section-logo {
                 margin-bottom: 0;
-                margin-right: 2rem; 
+                margin-right: 2rem;
              }
         }
         .about-text-block {
-            max-width: 600px; 
+            max-width: 600px;
         }
 
         /* Contact Form Styles */
         .contact-form input[type="text"],
         .contact-form input[type="email"],
         .contact-form textarea {
-            background-color: #1F2937; 
-            border: 1px solid #374151; 
-            color: #F3F4F6; 
-            border-radius: 0.5rem; 
+            background-color: #1F2937;
+            border: 1px solid #374151;
+            color: #F3F4F6;
+            border-radius: 0.5rem;
             padding: 10px 12px;
             width: 100%;
             transition: border-color 0.3s ease;
@@ -181,12 +199,12 @@
         .contact-form input[type="text"]:focus,
         .contact-form input[type="email"]:focus,
         .contact-form textarea:focus {
-            border-color: #3B82F6; 
-            outline: none; 
+            border-color: #3B82F6;
+            outline: none;
         }
         .contact-form textarea {
             min-height: 120px;
-            resize: vertical; 
+            resize: vertical;
         }
         .form-message { /* For potential JS-driven messages later */
             margin-top: 1rem;
@@ -195,11 +213,11 @@
             font-weight: 500;
         }
         .form-message.success {
-            background-color: #10B981; 
+            background-color: #10B981;
             color: #065F46;
         }
         .form-message.error {
-            background-color: #EF4444; 
+            background-color: #EF4444;
             color: #991B1B;
         }
     </style>
@@ -208,7 +226,7 @@
 
     <header class="fixed top-0 left-0 right-0 z-40 bg-opacity-50 backdrop-blur-md bg-gray-900/30">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="block"> 
+            <a href="index.html" class="block">
                 <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/Logo-Name.png" alt="The Opus Group Logo" class="header-logo" onerror="this.onerror=null; this.src='https://placehold.co/200x60/1f2937/FFFFFF?text=Opus+Logo';">
             </a>
             <nav class="hidden md:flex space-x-8 items-center">
@@ -239,13 +257,28 @@
 
     <section class="hero-section">
         <div id="hero-slides-container">
-            <div class="hero-slide active" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-iheartradio-stage.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-sculptures-general.png');"></div>
-            <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-zest-cube.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-welding-action.png');"></div> 
-            <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-tim-burton-ufos-night.jpg');"></div>
+            <div class="hero-slide active">
+                <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-iheartradio-stage.jpg">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/3iaptyno83ax6ng014p4w/Sri-chakra.mp4?rlkey=ck7lwjn6fxx3870rx84l4ffee&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="hero-slide">
+                <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-sculptures-general.png">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/lgzvzhopun3s58av6c30s/Rob-Welding-e.mp4?rlkey=9obhejyeprctn41r81n6xpygg&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="hero-slide">
+                 <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-zest-cube.jpg">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/7mc3c0gxkr3h9bv6jjwzk/zest.mp4?rlkey=kpj5805f1u6172jl0hk5cxsdb&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="hero-slide hero-slide-image" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-welding-action.png');"></div>
+            <div class="hero-slide hero-slide-image" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-tim-burton-ufos-night.jpg');"></div>
         </div>
-        <div class="hero-overlay"></div> 
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
                 Crafting Unforgettable <span class="text-blue-400">Experiences</span>.
@@ -264,8 +297,8 @@
                 Discover the impact of our creative solutions across diverse projects.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                <a href="project-lil-uzi-vert.html" class="block group card overflow-hidden"> 
-                    <div class="gallery-item" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-iheartradio-stage.jpg');" 
+                <a href="project-lil-uzi-vert.html" class="block group card overflow-hidden">
+                    <div class="gallery-item" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-iheartradio-stage.jpg');"
                          onerror="this.style.backgroundImage='url(https://placehold.co/600x400/2d3748/edf2f7?text=Lil+Uzi+Vert)'">
                         <div class="p-6 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end h-full">
                             <h3 class="text-xl font-semibold text-white mb-1">Lil Uzi Vert: Large Skull</h3>
@@ -309,7 +342,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="project-capabilities.html" class="block group card overflow-hidden"> 
+                <a href="project-capabilities.html" class="block group card overflow-hidden">
                      <div class="gallery-item" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-welding-action.png');">
                         <div class="p-6 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end h-full">
                             <h3 class="text-xl font-semibold text-white mb-1">Capabilities</h3>
@@ -370,7 +403,7 @@
         </div>
     </section>
 
-    <section id="about" class="section"> 
+    <section id="about" class="section">
         <div class="container mx-auto">
             <div class="about-section-content text-center md:text-left">
                 <img src="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/opus-logo-icon.png" alt="The Opus Group - Our Fabrication Studio" class="about-section-logo mx-auto md:mx-0" onerror="this.onerror=null; this.src='https://placehold.co/250x150/1f2937/FFFFFF?text=Opus+Group+Logo';">
@@ -379,19 +412,19 @@
                     <p class="text-lg text-gray-300 mb-4 leading-relaxed">
                         A full service creative design and fabrication shop located in Los Angeles, California. We specialize in custom sculptural art, decorative art installations, film & television props, metal art, in-store marketing displays and immersive experiential and interactive environments.
                     </p>
-                    <a href="#contact" class="btn btn-primary mt-6">Get In Touch</a> 
+                    <a href="#contact" class="btn btn-primary mt-6">Get In Touch</a>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="section bg-gray-900">
-        <div class="container mx-auto text-center max-w-3xl"> 
+        <div class="container mx-auto text-center max-w-3xl">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's Create Something Amazing</h2>
             <p class="text-lg text-gray-400 mb-12 max-w-xl mx-auto">
                 Have a project in mind or want to learn more about our work? We'd love to hear from you.
             </p>
-            
+
             <form name="contact" method="POST" data-netlify="true" class="contact-form space-y-6 text-left">
                 <input type="hidden" name="form-name" value="contact">
                 <div>
@@ -414,11 +447,11 @@
                     <button type="submit" class="btn btn-primary w-full md:w-auto">Send Message</button>
                 </div>
             </form>
-            <div id="form-status-message" class="form-message hidden"></div> 
+            <div id="form-status-message" class="form-message hidden"></div>
         </div>
     </section>
 
-    <footer class="bg-gray-900 py-12 text-center"> 
+    <footer class="bg-gray-900 py-12 text-center">
         <div class="container mx-auto">
             <p class="text-gray-500">&copy; <span id="currentYear"></span> The Opus Group. All Rights Reserved.</p>
         </div>
@@ -434,7 +467,7 @@
         if(mobileMenuButton && mobileMenu && closeMobileMenuButton) {
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.add('active');
-                document.body.style.overflow = 'hidden'; 
+                document.body.style.overflow = 'hidden';
             });
 
             closeMobileMenuButton.addEventListener('click', () => {
@@ -449,21 +482,21 @@
                 });
             });
         }
-        
+
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
         // Simple fade-in on scroll observer for sections
         const observerOptions = {
-            root: null, 
-            rootMargin: '0px', 
-            threshold: 0.1 
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
         };
 
         const observerCallback = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); 
+                    observer.unobserve(entry.target);
                 }
             });
         };
@@ -474,29 +507,44 @@
 
         // Hero Slideshow Functionality
         const slidesContainer = document.getElementById('hero-slides-container');
-        if (slidesContainer) { 
+        if (slidesContainer) {
             const slides = slidesContainer.querySelectorAll('.hero-slide');
             let currentSlide = 0;
-            const slideInterval = 5000; 
+            const slideInterval = 5000; // Interval for video slides (can be longer if desired)
 
             function nextSlide() {
-                if (slides.length > 0) { 
+                if (slides.length > 0) {
                     slides[currentSlide].classList.remove('active');
+                    const currentVideo = slides[currentSlide].querySelector('video');
+                    if (currentVideo) {
+                        currentVideo.pause(); // Pause current video
+                        currentVideo.currentTime = 0; // Reset to start
+                    }
+
                     currentSlide = (currentSlide + 1) % slides.length;
                     slides[currentSlide].classList.add('active');
+                    const nextVideo = slides[currentSlide].querySelector('video');
+                    if (nextVideo) {
+                        nextVideo.play().catch(error => console.error("Video play failed:", error)); // Play next video
+                    }
+                }
+            }
+            // Initialize first video if it exists
+            if (slides.length > 0) {
+                const firstVideo = slides[0].querySelector('video');
+                if (firstVideo) {
+                     firstVideo.play().catch(error => console.error("Initial video play failed:", error));
                 }
             }
 
-            if (slides.length > 1) { 
+
+            if (slides.length > 1) {
                  setInterval(nextSlide, slideInterval);
-            } else if (slides.length === 1) { 
+            } else if (slides.length === 1 && !slides[0].querySelector('video')) { // Only add active if it's an image slide and only one
                 slides[0].classList.add('active');
             }
         }
 
-        // Note: JavaScript for client-side contact form feedback has been removed
-        // as Netlify will handle form submissions and success/error messages.
-        // You can configure a custom success page in your Netlify settings.
     </script>
 
 </body>
