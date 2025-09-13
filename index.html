@@ -23,9 +23,10 @@
 
         /* Hero Section Styles */
         .hero-section {
-            height: 100vh; 
-            position: relative; 
-            overflow: hidden; 
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background-color: #111827; /* Fallback for video loading */
         }
 
         .hero-slide {
@@ -34,38 +35,55 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out; 
-            z-index: 1; 
+            transition: opacity 1.2s ease-in-out;
+            z-index: 1;
         }
 
         .hero-slide.active {
             opacity: 1;
-            z-index: 2; 
+            z-index: 2;
         }
 
+        .hero-slide video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover; /* Ensure video covers the area */
+            z-index: 1; /* Video itself */
+        }
+         /* Fallback for hero slides if video doesn't load or for image slides */
+        .hero-slide-image {
+            background-size: cover;
+            background-position: center;
+        }
+
+
         .hero-content {
-            position: relative; 
-            z-index: 3; 
+            position: relative;
+            z-index: 3;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            height: 100%; 
-            padding: 1.5rem; 
+            height: 100%;
+            padding: 1.5rem;
         }
-        
+
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); 
-            z-index: 2; 
+            background-color: rgba(0, 0, 0, 0.65); /* Slightly increased opacity for better text contrast on video */
+            z-index: 2;
         }
 
         .section {
@@ -240,11 +258,26 @@
 
     <section class="hero-section">
         <div id="hero-slides-container">
-            <div class="hero-slide active" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-iheartradio-stage.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-sculptures-general.png');"></div>
-            <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-zest-cube.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-welding-action.png');"></div> 
-            <div class="hero-slide" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-tim-burton-ufos-night.jpg');"></div>
+            <div class="hero-slide active">
+                <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-iheartradio-stage.jpg">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/3iaptyno83ax6ng014p4w/Sri-chakra.mp4?rlkey=ck7lwjn6fxx3870rx84l4ffee&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="hero-slide">
+                <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-sculptures-general.png">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/lgzvzhopun3s58av6c30s/Rob-Welding-e.mp4?rlkey=9obhejyeprctn41r81n6xpygg&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="hero-slide">
+                 <video autoplay loop muted playsinline poster="https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-zest-cube.jpg">
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/7mc3c0gxkr3h9bv6jjwzk/zest.mp4?rlkey=kpj5805f1u6172jl0hk5cxsdb&dl=1" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="hero-slide hero-slide-image" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-welding-action.png');"></div>
+            <div class="hero-slide hero-slide-image" style="background-image: url('https://raw.githubusercontent.com/opus213/Opus-Grop-Webpage/main/Images/hero-tim-burton-ufos-night.jpg');"></div>
         </div>
         <div class="hero-overlay"></div> 
         <div class="hero-content">
@@ -467,24 +500,43 @@
 
         // Hero Slideshow Functionality
         const slidesContainer = document.getElementById('hero-slides-container');
-        if (slidesContainer) { 
+        if (slidesContainer) {
             const slides = slidesContainer.querySelectorAll('.hero-slide');
             let currentSlide = 0;
-            const slideInterval = 5000; 
+            const slideInterval = 5000; // Interval for video slides (can be longer if desired)
 
             function nextSlide() {
-                if (slides.length > 0) { 
+                if (slides.length > 0) {
                     slides[currentSlide].classList.remove('active');
+                    const currentVideo = slides[currentSlide].querySelector('video');
+                    if (currentVideo) {
+                        currentVideo.pause(); // Pause current video
+                        currentVideo.currentTime = 0; // Reset to start
+                    }
+
                     currentSlide = (currentSlide + 1) % slides.length;
                     slides[currentSlide].classList.add('active');
+                    const nextVideo = slides[currentSlide].querySelector('video');
+                    if (nextVideo) {
+                        nextVideo.play().catch(error => console.error("Video play failed:", error)); // Play next video
+                    }
+                }
+            }
+            // Initialize first video if it exists
+            if (slides.length > 0) {
+                const firstVideo = slides[0].querySelector('video');
+                if (firstVideo) {
+                     firstVideo.play().catch(error => console.error("Initial video play failed:", error));
                 }
             }
 
-            if (slides.length > 1) { 
+
+            if (slides.length > 1) {
                  setInterval(nextSlide, slideInterval);
-            } else if (slides.length === 1) { 
+            } else if (slides.length === 1 && !slides[0].querySelector('video')) { // Only add active if it's an image slide and only one
                 slides[0].classList.add('active');
             }
+        }
 
         // Note: JavaScript for client-side contact form feedback has been removed
         // as Netlify will handle form submissions and success/error messages.
@@ -493,3 +545,5 @@
 
 </body>
 </html>
+
+
